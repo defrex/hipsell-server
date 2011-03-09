@@ -7,6 +7,7 @@ PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
+DEVELOPMENT = DEBUG
 
 ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
@@ -32,7 +33,7 @@ SITE_ID = 1
 USE_I18N = False
 USE_L10N = True
 
-MEDIA_ROOT = os.path.join(PROJECT_DIR, '/media/')
+MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media/')
 MEDIA_URL = '/media/'
 ADMIN_MEDIA_PREFIX = '/admin_media/'
 
@@ -57,7 +58,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = (
-    os.path.join(PROJECT_DIR, '/templates/')
+    os.path.join(PROJECT_DIR, 'templates/')
 )
 
 INSTALLED_APPS = (
@@ -71,7 +72,10 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'coat',
+    'javascript',
 )
+
+JS_DIR = os.path.join(MEDIA_ROOT, 'js/')
 
 COAT_COMPILERS = {
     'scss': ('css', 'sass %(source)s %(target)s'),

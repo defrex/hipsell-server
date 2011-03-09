@@ -1,3 +1,4 @@
 Django==1.2.5
 distribute==0.6.10
 django-coat==0.3.1
+-e git://github.com/defrex/django-javascript.git@6a92ba07c67c7eb733ac677b470ee2bab8938834#egg=django_javascript-0.1-py2.6-dev
