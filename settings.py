@@ -1,9 +1,10 @@
 # Django settings for rl project.
 
-import os
+import os, sys
 from coat.settings import *
 
 PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
+sys.path.append(os.path.join(PROJECT_DIR, 'apps'))
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
@@ -67,12 +68,14 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
+    'south',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'coat',
     'javascript',
+    'listings',
 )
 
 JS_DIR = os.path.join(MEDIA_ROOT, 'js')
