@@ -8,8 +8,8 @@ class Location(models.Model):
     latitude = models.IntegerField()
     longtitude = models.IntegerField()
 
-    def __unicode(self):
-        return '%s, %s' % (latitude, longtitude,)
+    def __unicode__(self):
+        return '%s, %s' % (self.latitude, self.longtitude,)
 
 class Listing(models.Model):
     """
@@ -21,8 +21,9 @@ class Listing(models.Model):
     location = models.OneToOneField(Location)
     photo = models.ImageField(upload_to='foo')
     poster = models.ForeignKey(User)
+    price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
 
-    def __unicode(self):
+    def __unicode__(self):
         return self.description
 
 class Offer(models.Model):
@@ -33,7 +34,7 @@ class Offer(models.Model):
     poster = models.ForeignKey(User)
     listing = models.ForeignKey(Listing)
 
-    def __unicode(self):
+    def __unicode__(self):
         return '$%d' % (amount,)
 
 class Comment(models.Model):
@@ -45,7 +46,7 @@ class Comment(models.Model):
     offer = models.ForeignKey(Offer)
     poster = models.ForeignKey(User)
 
-    def __unicode(self):
+    def __unicode__(self):
         return self.comment
 
 class Question(models.Model):
@@ -57,5 +58,5 @@ class Question(models.Model):
     poster = models.ForeignKey(User)
     question = models.CharField(max_length=255)
 
-    def __unicode(self):
+    def __unicode__(self):
         return self.question
