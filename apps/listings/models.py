@@ -35,7 +35,7 @@ class Offer(models.Model):
     listing = models.ForeignKey(Listing)
 
     def __unicode__(self):
-        return '$%d' % (amount,)
+        return '$%d' % (self.amount,)
 
 class Comment(models.Model):
     """
