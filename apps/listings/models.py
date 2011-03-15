@@ -5,8 +5,8 @@ class Location(models.Model):
     """
     Coordinate location.
     """
-    latitude = models.IntegerField()
-    longtitude = models.IntegerField()
+    latitude = models.DecimalField(max_digits=7, decimal_places=4)
+    longtitude = models.DecimalField(max_digits=7, decimal_places=4)
 
     def __unicode__(self):
         return '%s, %s' % (self.latitude, self.longtitude,)
