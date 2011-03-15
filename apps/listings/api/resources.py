@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from tastypie import fields
 from tastypie.resources import ModelResource
 
-from listings.models import Listing, Location
+from listings.models import Listing, Location, Offer, Comment, Question
 
 class UserResource(ModelResource):
     class Meta:
@@ -21,3 +21,27 @@ class ListingResource(ModelResource):
     class Meta:
         queryset = Listing.objects.all()
         resource_name = 'listing'
+
+class OfferResource(ModelResource):
+    user = fields.ForeignKey(UserResource, 'user')
+    listing = fields.ForeignKey(ListingResource, 'listing')
+
+    class Meta:
+        queryset = Offer.objects.all()
+        resource_name = 'offer'
+
+class CommentResource(ModelResource):
+    user = fields.ForeignKey(UserResource, 'user')
+    offer = fields.ForeignKey(OfferResource, 'offer')
+
+    class Meta:
+        queryset = Comment.objects.all()
+        resource_name = 'comment'
+
+class QuestionResource(ModelResource):
+    user = fields.ForeignKey(UserResource, 'user')
+    listing = fields.ForeignKey(ListingResource, 'listing')
+
+    class Meta:
+        queryset = Question.objects.all()
+        resource_name = 'question'
