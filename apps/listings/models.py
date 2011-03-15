@@ -19,8 +19,8 @@ class Listing(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     description = models.CharField(max_length=255)
     location = models.OneToOneField(Location)
-    photo = models.ImageField(upload_to='foo')
-    poster = models.ForeignKey(User)
+    photo = models.ImageField(upload_to='uploads')
+    user = models.ForeignKey(User)
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
 
     def __unicode__(self):
@@ -31,7 +31,7 @@ class Offer(models.Model):
     Potential buyer's offer on a listing.
     """
     amount = models.DecimalField(max_digits=10, decimal_places=2)
-    poster = models.ForeignKey(User)
+    user = models.ForeignKey(User)
     listing = models.ForeignKey(Listing)
 
     def __unicode__(self):
@@ -44,7 +44,7 @@ class Comment(models.Model):
     comment = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     offer = models.ForeignKey(Offer)
-    poster = models.ForeignKey(User)
+    user = models.ForeignKey(User)
 
     def __unicode__(self):
         return self.comment
@@ -55,7 +55,7 @@ class Question(models.Model):
     """
     answer = models.TextField(blank=True)
     listing = models.ForeignKey(Listing)
-    poster = models.ForeignKey(User)
+    user = models.ForeignKey(User)
     question = models.CharField(max_length=255)
 
     def __unicode__(self):
