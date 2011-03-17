@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('a').click(function(e) {
+                    e.preventDefault();
+                    href = $(this).text();
+                    console.log(href);
+                    $.get(href, function(data) {
+                        console.log(data);                
+                    });
+                });
+            });
+        </script>
+        <style>
+            a { display: block; }
+        </style>
+    </head>
+    <body>
+        <a href="#">/api/v1/</a>
+        <a href="#">/api/v1/listing/</a>
+        <a href="#">/api/v1/listing/1/</a>
+        <a href="#">/api/v1/offer/</a>
+        <a href="#">/api/v1/offer/1/</a>
+        <a href="#">/api/v1/comment/</a>
+        <a href="#">/api/v1/comment/1/</a>
+        <a href="#">/api/v1/question/</a>
+        <a href="#">/api/v1/question/1/</a>
+        <a href="#">/api/v1/location/</a>
+        <a href="#">/api/v1/location/1/</a>
+    </body>
+</html>

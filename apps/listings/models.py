@@ -19,7 +19,7 @@ class Listing(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     description = models.CharField(max_length=255)
     location = models.OneToOneField(Location)
-    photo = models.ImageField(upload_to='uploads')
+    photo = models.ImageField(upload_to='uploads', null=True, blank=True)
     user = models.ForeignKey(User)
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
 
