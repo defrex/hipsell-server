@@ -6,6 +6,8 @@ except ImportError:
     import simplejson as json
 
 class ViewsTestCase(TestCase):
+    fixtures = ['listings_test.json',]
+
     def test_gets(self):
         resp = self.client.get('/api/v1/', data={'format': 'json'})
         self.assertEqual(resp.status_code, 200)
@@ -16,7 +18,7 @@ class ViewsTestCase(TestCase):
         resp = self.client.get('/api/v1/listing/', data={'format': 'json'})
         self.assertEqual(resp.status_code, 200)
         deserialized = json.loads(resp.content)
-        self.assertEqual(len(deserialized['objects']), 2)
+        self.assertEqual(len(deserialized['objects']), 1)
         self.assertEqual([obj['description'] for obj in deserialized['objects']], [u'Slightly used Super 88 system',])
         
         #resp = self.client.get('/api/v1/notes/1/', data={'format': 'json'})
