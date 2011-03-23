@@ -6,7 +6,10 @@ except ImportError:
     import simplejson as json
 
 class ViewsTestCase(TestCase):
-    fixtures = ['listings_test.json',]
+    fixtures = [
+        'users',
+        'listings',
+    ]
 
     def test_gets(self):
         resp = self.client.get('/api/v1/', data={'format': 'json'})
@@ -18,21 +21,28 @@ class ViewsTestCase(TestCase):
         resp = self.client.get('/api/v1/listing/', data={'format': 'json'})
         self.assertEqual(resp.status_code, 200)
         deserialized = json.loads(resp.content)
-        self.assertEqual(len(deserialized['objects']), 1)
-        self.assertEqual([obj['description'] for obj in deserialized['objects']], [u'Slightly used Super 88 system',])
+        self.assertEqual(len(deserialized['objects']), 3)
+        self.assertEqual([obj['description'] for obj in deserialized['objects']], [
+            u'Magic fish hat',
+            u'Cat - BNIB',
+            u'Slightly used Super 88 system',
+        ])
         
-        #resp = self.client.get('/api/v1/notes/1/', data={'format': 'json'})
-        #self.assertEqual(resp.status_code, 200)
-        #deserialized = json.loads(resp.content)
-        #self.assertEqual(len(deserialized), 9)
-        #self.assertEqual(deserialized['title'], u'First Post!')
+        resp = self.client.get('/api/v1/listing/1/', data={'format': 'json'})
+        self.assertEqual(resp.status_code, 200)
+        deserialized = json.loads(resp.content)
+        self.assertEqual(len(deserialized), 10)
+        self.assertEqual(deserialized['description'], u'Slightly used Super 88 system')
         
-        #resp = self.client.get('/api/v1/notes/set/2;1/', data={'format': 'json'})
-        #self.assertEqual(resp.status_code, 200)
-        #deserialized = json.loads(resp.content)
-        #self.assertEqual(len(deserialized), 1)
-        #self.assertEqual(len(deserialized['objects']), 2)
-        #self.assertEqual([obj['title'] for obj in deserialized['objects']], [u'Another Post', u'First Post!'])
+        resp = self.client.get('/api/v1/listing/set/2;1/', data={'format': 'json'})
+        self.assertEqual(resp.status_code, 200)
+        deserialized = json.loads(resp.content)
+        self.assertEqual(len(deserialized), 1)
+        self.assertEqual(len(deserialized['objects']), 2)
+        self.assertEqual([obj['description'] for obj in deserialized['objects']], [
+            u'Cat - BNIB',
+            u'Slightly used Super 88 system',
+        ])
     
     #def test_posts(self):
         #request = HttpRequest()

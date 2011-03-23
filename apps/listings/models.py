@@ -1,7 +1,16 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-class Location(models.Model):
+class BaseModel(models.Model):
+    created_on = models.DateTimeField(auto_now_add=True)
+    modified_on = models.DateTimeField(auto_now=True)
+    active = models.BooleanField(default=True)
+
+    class Meta:
+        abstract = True
+        ordering = ['-id',]
+
+class Location(BaseModel):
     """
     Coordinate location.
     """
@@ -11,12 +20,10 @@ class Location(models.Model):
     def __unicode__(self):
         return '%s, %s' % (self.latitude, self.longtitude,)
 
-class Listing(models.Model):
+class Listing(BaseModel):
     """
     Seller's listing.
     """
-    active = models.BooleanField(default=True)
-    created_on = models.DateTimeField(auto_now_add=True)
     description = models.CharField(max_length=255)
     location = models.OneToOneField(Location)
     photo = models.ImageField(upload_to='uploads', null=True, blank=True)
@@ -26,7 +33,7 @@ class Listing(models.Model):
     def __unicode__(self):
         return self.description
 
-class Offer(models.Model):
+class Offer(BaseModel):
     """
     Potential buyer's offer on a listing.
     """
@@ -37,19 +44,18 @@ class Offer(models.Model):
     def __unicode__(self):
         return '$%d' % (self.amount,)
 
-class Comment(models.Model):
+class Comment(BaseModel):
     """
     Conversation over an offer.
     """
     comment = models.TextField()
-    created_on = models.DateTimeField(auto_now_add=True)
     offer = models.ForeignKey(Offer)
     user = models.ForeignKey(User)
 
     def __unicode__(self):
         return self.comment
 
-class Question(models.Model):
+class Question(BaseModel):
     """
     Pre-sale questions and answers (public).
     """

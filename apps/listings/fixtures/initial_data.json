@@ -3,7 +3,7 @@
         "pk": 1, 
         "model": "auth.user", 
         "fields": {
-            "username": "jason"
+            "username": "typh"
         }
     }, 
     {
@@ -22,6 +22,22 @@
         }
     }, 
     {
+        "pk": 2, 
+        "model": "listings.location", 
+        "fields": {
+            "latitude": "43.64", 
+            "longtitude": "-79.4"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "listings.location", 
+        "fields": {
+            "latitude": "43.7", 
+            "longtitude": "-79.5"
+        }
+    }, 
+    {
         "pk": 1, 
         "model": "listings.listing", 
         "fields": {
@@ -32,6 +48,32 @@
             "user": 1, 
             "active": true, 
             "location": 1
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "listings.listing", 
+        "fields": {
+            "description": "Cat - BNIB", 
+            "photo": "uploads/cat.jpg", 
+            "price": "5", 
+            "created_on": "2011-03-22 21:31:40", 
+            "user": 1, 
+            "active": true, 
+            "location": 2
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "listings.listing", 
+        "fields": {
+            "description": "Magic fish hat", 
+            "photo": "uploads/fishhat.jpg", 
+            "price": "100", 
+            "created_on": "2011-03-22 21:48:14", 
+            "user": 2, 
+            "active": true, 
+            "location": 3
         }
     }, 
     {

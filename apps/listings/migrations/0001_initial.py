@@ -11,28 +11,36 @@ class Migration(SchemaMigration):
         # Adding model 'Location'
         db.create_table('listings_location', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('latitude', self.gf('django.db.models.fields.IntegerField')()),
-            ('longtitude', self.gf('django.db.models.fields.IntegerField')()),
+            ('created_on', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
+            ('modified_on', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
+            ('active', self.gf('django.db.models.fields.BooleanField')(default=True)),
+            ('latitude', self.gf('django.db.models.fields.DecimalField')(max_digits=7, decimal_places=4)),
+            ('longtitude', self.gf('django.db.models.fields.DecimalField')(max_digits=7, decimal_places=4)),
         ))
         db.send_create_signal('listings', ['Location'])
 
         # Adding model 'Listing'
         db.create_table('listings_listing', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('active', self.gf('django.db.models.fields.BooleanField')(default=True)),
             ('created_on', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
+            ('modified_on', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
+            ('active', self.gf('django.db.models.fields.BooleanField')(default=True)),
             ('description', self.gf('django.db.models.fields.CharField')(max_length=255)),
             ('location', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['listings.Location'], unique=True)),
-            ('photo', self.gf('django.db.models.fields.files.ImageField')(max_length=100)),
-            ('poster', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
+            ('photo', self.gf('django.db.models.fields.files.ImageField')(max_length=100, null=True, blank=True)),
+            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
+            ('price', self.gf('django.db.models.fields.DecimalField')(null=True, max_digits=10, decimal_places=2, blank=True)),
         ))
         db.send_create_signal('listings', ['Listing'])
 
         # Adding model 'Offer'
         db.create_table('listings_offer', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('created_on', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
+            ('modified_on', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
+            ('active', self.gf('django.db.models.fields.BooleanField')(default=True)),
             ('amount', self.gf('django.db.models.fields.DecimalField')(max_digits=10, decimal_places=2)),
-            ('poster', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
+            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
             ('listing', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['listings.Listing'])),
         ))
         db.send_create_signal('listings', ['Offer'])
@@ -40,19 +48,24 @@ class Migration(SchemaMigration):
         # Adding model 'Comment'
         db.create_table('listings_comment', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('comment', self.gf('django.db.models.fields.TextField')()),
             ('created_on', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
+            ('modified_on', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
+            ('active', self.gf('django.db.models.fields.BooleanField')(default=True)),
+            ('comment', self.gf('django.db.models.fields.TextField')()),
             ('offer', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['listings.Offer'])),
-            ('poster', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
+            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
         ))
         db.send_create_signal('listings', ['Comment'])
 
         # Adding model 'Question'
         db.create_table('listings_question', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('created_on', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
+            ('modified_on', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
+            ('active', self.gf('django.db.models.fields.BooleanField')(default=True)),
             ('answer', self.gf('django.db.models.fields.TextField')(blank=True)),
             ('listing', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['listings.Listing'])),
-            ('poster', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
+            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
             ('question', self.gf('django.db.models.fields.CharField')(max_length=255)),
         ))
         db.send_create_signal('listings', ['Question'])
@@ -114,43 +127,56 @@ class Migration(SchemaMigration):
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
         'listings.comment': {
-            'Meta': {'object_name': 'Comment'},
+            'Meta': {'ordering': "['created_on']", 'object_name': 'Comment'},
+            'active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'comment': ('django.db.models.fields.TextField', [], {}),
             'created_on': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'modified_on': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             'offer': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['listings.Offer']"}),
-            'poster': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
         },
         'listings.listing': {
-            'Meta': {'object_name': 'Listing'},
+            'Meta': {'ordering': "['created_on']", 'object_name': 'Listing'},
             'active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'created_on': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'description': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'location': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['listings.Location']", 'unique': 'True'}),
-            'photo': ('django.db.models.fields.files.ImageField', [], {'max_length': '100'}),
-            'poster': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
+            'modified_on': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
+            'photo': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
+            'price': ('django.db.models.fields.DecimalField', [], {'null': 'True', 'max_digits': '10', 'decimal_places': '2', 'blank': 'True'}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
         },
         'listings.location': {
-            'Meta': {'object_name': 'Location'},
+            'Meta': {'ordering': "['created_on']", 'object_name': 'Location'},
+            'active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'created_on': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'latitude': ('django.db.models.fields.IntegerField', [], {}),
-            'longtitude': ('django.db.models.fields.IntegerField', [], {})
+            'latitude': ('django.db.models.fields.DecimalField', [], {'max_digits': '7', 'decimal_places': '4'}),
+            'longtitude': ('django.db.models.fields.DecimalField', [], {'max_digits': '7', 'decimal_places': '4'}),
+            'modified_on': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'})
         },
         'listings.offer': {
-            'Meta': {'object_name': 'Offer'},
+            'Meta': {'ordering': "['created_on']", 'object_name': 'Offer'},
+            'active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'amount': ('django.db.models.fields.DecimalField', [], {'max_digits': '10', 'decimal_places': '2'}),
+            'created_on': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'listing': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['listings.Listing']"}),
-            'poster': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
+            'modified_on': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
         },
         'listings.question': {
-            'Meta': {'object_name': 'Question'},
+            'Meta': {'ordering': "['created_on']", 'object_name': 'Question'},
+            'active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'answer': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            'created_on': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'listing': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['listings.Listing']"}),
-            'poster': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
-            'question': ('django.db.models.fields.CharField', [], {'max_length': '255'})
+            'modified_on': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
+            'question': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
         }
     }
 

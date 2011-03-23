@@ -1,0 +1,94 @@
+[
+    {
+        "pk": 1, 
+        "model": "listings.location", 
+        "fields": {
+            "latitude": "43.6519", 
+            "longtitude": "-79.3736"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "listings.location", 
+        "fields": {
+            "latitude": "43.64", 
+            "longtitude": "-79.4"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "listings.location", 
+        "fields": {
+            "latitude": "43.7", 
+            "longtitude": "-79.5"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "listings.listing", 
+        "fields": {
+            "description": "Slightly used Super 88 system", 
+            "photo": "uploads/7725.mariotwins.jpg", 
+            "price": "2", 
+            "created_on": "2011-03-16 19:19:39", 
+            "user": 1, 
+            "active": true, 
+            "location": 1
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "listings.listing", 
+        "fields": {
+            "description": "Cat - BNIB", 
+            "photo": "uploads/cat.jpg", 
+            "price": "5", 
+            "created_on": "2011-03-22 21:31:40", 
+            "user": 1, 
+            "active": true, 
+            "location": 2
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "listings.listing", 
+        "fields": {
+            "description": "Magic fish hat", 
+            "photo": "uploads/fishhat.jpg", 
+            "price": "100", 
+            "created_on": "2011-03-22 21:48:14", 
+            "user": 2, 
+            "active": true, 
+            "location": 3
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "listings.offer", 
+        "fields": {
+            "amount": "3", 
+            "user": 1, 
+            "listing": 1
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "listings.comment", 
+        "fields": {
+            "comment": "Are you able to dropoff?", 
+            "created_on": "2011-03-16 19:37:33", 
+            "user": 2, 
+            "offer": 1
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "listings.question", 
+        "fields": {
+            "answer": "Yes, it comes with Mario Twins.", 
+            "question": "Does it come with any games?", 
+            "user": 1, 
+            "listing": 1
+        }
+    }
+]
