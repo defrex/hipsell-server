@@ -4,10 +4,9 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
         <script>
             $(document).ready(function() {
-                $('a').click(function(e) {
+                $('#get span').click(function(e) {
                     e.preventDefault();
                     href = $(this).text();
-                    console.log(href);
                     $.get(href, function(data) {
                         console.log(data);                
                     });
@@ -15,20 +14,48 @@
             });
         </script>
         <style>
-            a { display: block; }
+            div { margin: 1em; }
+            span { display: block; }
         </style>
     </head>
     <body>
-        <a href="#">/api/v1/</a>
-        <a href="#">/api/v1/listing/</a>
-        <a href="#">/api/v1/listing/1/</a>
-        <a href="#">/api/v1/offer/</a>
-        <a href="#">/api/v1/offer/1/</a>
-        <a href="#">/api/v1/comment/</a>
-        <a href="#">/api/v1/comment/1/</a>
-        <a href="#">/api/v1/question/</a>
-        <a href="#">/api/v1/question/1/</a>
-        <a href="#">/api/v1/location/</a>
-        <a href="#">/api/v1/location/1/</a>
+        <div id="get">
+            <strong>GET</strong>
+            <span>/api/v1/</span>
+            <span>/api/v1/listing/</span>
+            <span>/api/v1/listing/1/</span>
+            <span>/api/v1/offer/</span>
+            <span>/api/v1/offer/1/</span>
+            <span>/api/v1/comment/</span>
+            <span>/api/v1/comment/1/</span>
+            <span>/api/v1/question/</span>
+            <span>/api/v1/question/1/</span>
+            <span>/api/v1/location/</span>
+            <span>/api/v1/location/1/</span>
+        </div>
+
+        <div id="post">
+            <strong>POST</strong>
+
+            <span id="listing_post">/api/v1/listing/</span>
+            <script>
+                $('#listing_post').click(function(e) {
+                    $.post(
+                        $(this).text(), 
+                        {
+                            description: 'Slightly used Super 88 system', 
+                            photo: 'uploads/7725.mariotwins.jpg', 
+                            price: '2', 
+                            user: '/api/v1/users/1/',
+                            location: '/api/v1/location/1/',
+                        },
+                        function(data) {
+                            console.log(data);
+                        }
+                    );
+                });
+            </script>
+
+        </div>
     </body>
 </html>

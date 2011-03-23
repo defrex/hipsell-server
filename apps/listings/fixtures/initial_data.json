@@ -42,7 +42,7 @@
         "model": "listings.listing", 
         "fields": {
             "description": "Slightly used Super 88 system", 
-            "photo": "uploads/7725.mariotwins.jpg", 
+            "photo": "uploads/mariotwins.jpg", 
             "price": "2", 
             "created_on": "2011-03-16 19:19:39", 
             "user": 1, 

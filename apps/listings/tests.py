@@ -40,22 +40,27 @@ class ViewsTestCase(TestCase):
             u'Slightly used Super 88 system',
         ])
     
-    #def test_posts(self):
-        #request = HttpRequest()
-        #post_data = '{"content": "A new post.", "is_active": true, "title": "New Title", "slug": "new-title", "user": "/api/v1/users/1/"}'
-        #request._raw_post_data = post_data
+    def test_posts(self):
+        request = HttpRequest()
+        post_data = '''{
+            'description': 'Slightly used Super 88 system', 
+            'photo': 'uploads/7725.mariotwins.jpg', 
+            'price': '2', 
+            'user': '/api/v1/users/1/',
+            'location': '/api/v1/location/1/',
+        }'''
+        request._raw_post_data = post_data
         
-        #resp = self.client.post('/api/v1/notes/', data=post_data, content_type='application/json')
-        #self.assertEqual(resp.status_code, 201)
-        #self.assertEqual(resp['location'], 'http://testserver/api/v1/notes/3/')
+        resp = self.client.post('/api/v1/listing/', data=post_data, content_type='application/json')
+        print resp
+        self.assertEqual(resp.status_code, 201)
+        self.assertEqual(resp['location'], 'http://testserver/api/v1/listing/4/')
 
-        ## make sure posted object exists
-        #resp = self.client.get('/api/v1/notes/3/', data={'format': 'json'})
-        #self.assertEqual(resp.status_code, 200)
-        #obj = json.loads(resp.content)
-        #self.assertEqual(obj['content'], 'A new post.')
-        #self.assertEqual(obj['is_active'], True)
-        #self.assertEqual(obj['user'], '/api/v1/users/1/')
+        #make sure posted object exists
+        resp = self.client.get('/api/v1/listing/4/', data={'format': 'json'})
+        self.assertEqual(resp.status_code, 200)
+        obj = json.loads(resp.content)
+        self.assertEqual(obj['description'], 'Slightly used Super 88 system')
     
     #def test_api_field_error(self):
         ## When a field error is encountered, we should be presenting the message
