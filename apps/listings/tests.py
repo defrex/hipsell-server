@@ -6,10 +6,6 @@ except ImportError:
     import simplejson as json
 
 class ViewsTestCase(TestCase):
-    fixtures = [
-        'users',
-        'listings',
-    ]
 
     def test_gets(self):
         resp = self.client.get('/api/v1/', data={'format': 'json'})
