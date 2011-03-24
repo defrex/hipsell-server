@@ -10,25 +10,16 @@ class BaseModel(models.Model):
         abstract = True
         ordering = ['-id',]
 
-class Location(BaseModel):
-    """
-    Coordinate location.
-    """
-    latitude = models.DecimalField(max_digits=7, decimal_places=4)
-    longtitude = models.DecimalField(max_digits=7, decimal_places=4)
-
-    def __unicode__(self):
-        return '%s, %s' % (self.latitude, self.longtitude,)
-
 class Listing(BaseModel):
     """
     Seller's listing.
     """
     description = models.CharField(max_length=255)
-    location = models.OneToOneField(Location, null=True, blank=True)
     photo = models.ImageField(upload_to='uploads', null=True, blank=True)
     user = models.ForeignKey(User)
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    latitude = models.DecimalField(max_digits=7, decimal_places=4)
+    longtitude = models.DecimalField(max_digits=7, decimal_places=4)
 
     def __unicode__(self):
         return self.description

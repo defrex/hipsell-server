@@ -8,17 +8,6 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         
-        # Adding model 'Location'
-        db.create_table('listings_location', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('created_on', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('modified_on', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
-            ('active', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('latitude', self.gf('django.db.models.fields.DecimalField')(max_digits=7, decimal_places=4)),
-            ('longtitude', self.gf('django.db.models.fields.DecimalField')(max_digits=7, decimal_places=4)),
-        ))
-        db.send_create_signal('listings', ['Location'])
-
         # Adding model 'Listing'
         db.create_table('listings_listing', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
@@ -26,10 +15,11 @@ class Migration(SchemaMigration):
             ('modified_on', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
             ('active', self.gf('django.db.models.fields.BooleanField')(default=True)),
             ('description', self.gf('django.db.models.fields.CharField')(max_length=255)),
-            ('location', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['listings.Location'], unique=True, null=True, blank=True)),
             ('photo', self.gf('django.db.models.fields.files.ImageField')(max_length=100, null=True, blank=True)),
             ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
             ('price', self.gf('django.db.models.fields.DecimalField')(null=True, max_digits=10, decimal_places=2, blank=True)),
+            ('latitude', self.gf('django.db.models.fields.DecimalField')(max_digits=7, decimal_places=4)),
+            ('longtitude', self.gf('django.db.models.fields.DecimalField')(max_digits=7, decimal_places=4)),
         ))
         db.send_create_signal('listings', ['Listing'])
 
@@ -73,9 +63,6 @@ class Migration(SchemaMigration):
 
     def backwards(self, orm):
         
-        # Deleting model 'Location'
-        db.delete_table('listings_location')
-
         # Deleting model 'Listing'
         db.delete_table('listings_listing')
 
@@ -142,20 +129,12 @@ class Migration(SchemaMigration):
             'created_on': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'description': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'location': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['listings.Location']", 'unique': 'True', 'null': 'True', 'blank': 'True'}),
+            'latitude': ('django.db.models.fields.DecimalField', [], {'max_digits': '7', 'decimal_places': '4'}),
+            'longtitude': ('django.db.models.fields.DecimalField', [], {'max_digits': '7', 'decimal_places': '4'}),
             'modified_on': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             'photo': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
             'price': ('django.db.models.fields.DecimalField', [], {'null': 'True', 'max_digits': '10', 'decimal_places': '2', 'blank': 'True'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
-        },
-        'listings.location': {
-            'Meta': {'ordering': "['-id']", 'object_name': 'Location'},
-            'active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'created_on': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'latitude': ('django.db.models.fields.DecimalField', [], {'max_digits': '7', 'decimal_places': '4'}),
-            'longtitude': ('django.db.models.fields.DecimalField', [], {'max_digits': '7', 'decimal_places': '4'}),
-            'modified_on': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'})
         },
         'listings.offer': {
             'Meta': {'ordering': "['-id']", 'object_name': 'Offer'},

@@ -47,7 +47,8 @@ class ViewsTestCase(TestCase):
             'photo': 'uploads/7725.mariotwins.jpg', 
             'price': '2', 
             'user': '/api/v1/users/1/',
-            'location': '/api/v1/location/1/',
+            'latitude': '43.6519', 
+            'longtitude': '-79.3736'
         }'''
         request._raw_post_data = post_data
         

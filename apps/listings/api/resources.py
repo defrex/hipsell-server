@@ -3,7 +3,8 @@ from tastypie import fields
 from tastypie.authorization import Authorization
 from tastypie.resources import ModelResource
 
-from listings.models import Listing, Location, Offer, Comment, Question
+from listings.api.fields import Base64FileField
+from listings.models import Listing, Offer, Comment, Question
 
 class UserResource(ModelResource):
     class Meta:
@@ -11,16 +12,9 @@ class UserResource(ModelResource):
         queryset = User.objects.all()
         resource_name = 'user'
 
-class LocationResource(ModelResource):
-    class Meta:
-        authorization = Authorization()
-        queryset = User.objects.all()
-        queryset = Location.objects.all()
-        resource_name = 'location'
-
 class ListingResource(ModelResource):
+    photo = Base64FileField('photo')
     user = fields.ForeignKey(UserResource, 'user')
-    location = fields.ForeignKey(LocationResource, 'location')
 
     class Meta:
         authorization = Authorization()
