@@ -26,7 +26,7 @@ class Migration(SchemaMigration):
             ('modified_on', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
             ('active', self.gf('django.db.models.fields.BooleanField')(default=True)),
             ('description', self.gf('django.db.models.fields.CharField')(max_length=255)),
-            ('location', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['listings.Location'], unique=True)),
+            ('location', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['listings.Location'], unique=True, null=True, blank=True)),
             ('photo', self.gf('django.db.models.fields.files.ImageField')(max_length=100, null=True, blank=True)),
             ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
             ('price', self.gf('django.db.models.fields.DecimalField')(null=True, max_digits=10, decimal_places=2, blank=True)),
@@ -127,7 +127,7 @@ class Migration(SchemaMigration):
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
         'listings.comment': {
-            'Meta': {'ordering': "['created_on']", 'object_name': 'Comment'},
+            'Meta': {'ordering': "['-id']", 'object_name': 'Comment'},
             'active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'comment': ('django.db.models.fields.TextField', [], {}),
             'created_on': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
@@ -137,19 +137,19 @@ class Migration(SchemaMigration):
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
         },
         'listings.listing': {
-            'Meta': {'ordering': "['created_on']", 'object_name': 'Listing'},
+            'Meta': {'ordering': "['-id']", 'object_name': 'Listing'},
             'active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'created_on': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'description': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'location': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['listings.Location']", 'unique': 'True'}),
+            'location': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['listings.Location']", 'unique': 'True', 'null': 'True', 'blank': 'True'}),
             'modified_on': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             'photo': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
             'price': ('django.db.models.fields.DecimalField', [], {'null': 'True', 'max_digits': '10', 'decimal_places': '2', 'blank': 'True'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
         },
         'listings.location': {
-            'Meta': {'ordering': "['created_on']", 'object_name': 'Location'},
+            'Meta': {'ordering': "['-id']", 'object_name': 'Location'},
             'active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'created_on': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -158,7 +158,7 @@ class Migration(SchemaMigration):
             'modified_on': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'})
         },
         'listings.offer': {
-            'Meta': {'ordering': "['created_on']", 'object_name': 'Offer'},
+            'Meta': {'ordering': "['-id']", 'object_name': 'Offer'},
             'active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'amount': ('django.db.models.fields.DecimalField', [], {'max_digits': '10', 'decimal_places': '2'}),
             'created_on': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
@@ -168,7 +168,7 @@ class Migration(SchemaMigration):
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
         },
         'listings.question': {
-            'Meta': {'ordering': "['created_on']", 'object_name': 'Question'},
+            'Meta': {'ordering': "['-id']", 'object_name': 'Question'},
             'active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'answer': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'created_on': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
