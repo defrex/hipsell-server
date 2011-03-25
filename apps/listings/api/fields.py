@@ -1,5 +1,6 @@
 import base64
 import os
+from uuid import uuid4
 from tastypie.fields import FileField
 from django.core.files.uploadedfile import SimpleUploadedFile
 
@@ -45,5 +46,5 @@ class Base64FileField(FileField):
     def hydrate(self, obj):
         value = super(FileField, self).hydrate(obj)
         if value:
-            value = SimpleUploadedFile(value["name"], base64.b64decode(value["file"]), getattr(value, "content_type", "application/octet-stream"))
+            value = SimpleUploadedFile(str(uuid4()) + '.jpg', base64.b64decode(value), 'image/jpeg')
         return value

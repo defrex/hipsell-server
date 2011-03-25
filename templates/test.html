@@ -31,8 +31,6 @@
             <span>/api/v1/comment/1/</span>
             <span>/api/v1/question/</span>
             <span>/api/v1/question/1/</span>
-            <span>/api/v1/location/</span>
-            <span>/api/v1/location/1/</span>
         </div>
 
         <div id="post">
@@ -42,19 +40,14 @@
             <script>
                 $('#listing_post').click(function(e) {
                     $.Create({
-                        url: $(this).text(), 
+                        url: '/api/v1/listing/', 
                         data: {
-                            description: 'Slightly used Super 88 system', 
-                            photo: 'uploads/7725.mariotwins.jpg', 
+                            description: 'Cheap poop', 
                             price: '2', 
                             user: '/api/v1/user/1/',
                             latitude: '43.6519', 
                             longtitude: '-79.3736',
-                            photo: {
-                                'name': 'poop.gif',
-                                'file': '/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBggGBQkIBwgKCQkKDRYODQwMDRoTFBAWHxwhIB8cHh4jJzIqIyUvJR4eKzssLzM1ODg4ISo9QTw2QTI3ODUBCQoKDQsNGQ4OGTUkHiQ1NDU1NTU1NTU1LDU1NSo1KTU1NTU1NDUsNTU0LCw1NTU1NTU1NTU1NTU1NTUwNTU1Nf/AABEIABMAEwMBIgACEQEDEQH/xAAYAAEAAwEAAAAAAAAAAAAAAAAABgcIBf/EACQQAAICAgICAQUBAAAAAAAAAAECAwQFEQAhBhJBBxMUIjFx/8QAFQEBAQAAAAAAAAAAAAAAAAAABAL/xAAbEQACAwADAAAAAAAAAAAAAAAAAQIDEQQhgf/aAAwDAQACEQMRAD8AuqzN+LuzPYhgpwxO0xkGta0fb3J0qgBt7HyDsa7gH0++olDMLImXs/iXE/IsxtLdLxGJ2+8yEnQDxLpdMNhV2ugWAi/nPlUnkecu42KVYMXUutHYrWLLKbEifoX/ALpVVkBVF6JBZtMw9Y6MjlMJcjyuPNZpKs5lrivGGRiQVJlJPY9Cyn10f2PyAQCzmKNqgvREaG4aaMgMrV4zYRI5ioMiRuXVW12AxAJG/nQ/wcc5niXkUflfi9PLx13rCyGDQuwYoysUYbH9Hsp0etjXQ/nHHhynPr/jqvjmUxWQw8Qp2si88ll4ydOy/b0wU9KdsxJAGydnZ5XnjWSuZzzDD0MnZlsVrV+CGZGYj2VnCkbHY6J7B3xxyHXBvWkUpyXWms8ZjKmGxsNDHQLXqwL6xxr8fJJJ7JJ2ST2SST3xxxyyT//Z',
-                                'content_type': 'image/gif'
-                            }
+                            photo: '/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAATABMDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDpT4yj0rwPDY+KTLeqdZm0LXJhL9o8wyRyOzRNHtITLINuAyLuTbuUVNoWt20ml+DFHjXRtZ1qF1ilNxcJh0lxubYXWTz1QeUjFSxLsGUb2K8L49+IzeI4Tpeh2ktl4eeWVmlSFWN3JvWRJTHs3IPMDtwctkFgM4rktK1m4kkjtlntbiOViTbxySkTr1KmJEc8qOcgjg5rlqYlxdoK51UsOp/E7H13RXknhH4weHdN8MWll4r11o9agaSOdXtLhiAJGCclCT8mzljuP8XOaK6U7q5zNWdjwLxNe3GieLNa0rT5TFZWd/PBBGQH2RrIwVctknAAHJrL/wCEg1T/AJ+v/Ia/4UUVDo03q4r7i1VqL7T+8+mfhT4b0HX/AIb6Zqur6DpV7qF09xJPcT2MTvI3nycklaKKK0SsZt31Z//Z'
                         },
                         success: function(data) {
                             console.log(data);
