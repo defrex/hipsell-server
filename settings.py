@@ -54,6 +54,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'cors.middleware.CORSMiddleware',
 )
 
 ROOT_URLCONF = 'urls'
@@ -75,6 +76,7 @@ INSTALLED_APPS = (
     'coat',
     'javascript',
     'listings',
+    'cors',
 )
 
 JS_DIR = os.path.join(MEDIA_ROOT, 'js')

@@ -19,6 +19,7 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
     (r'^api/', include(v1_api.urls)),
     (r'^test/$', direct_to_template, {'template': 'test.html'}),
+    (r'^cors_test/$', 'cors.views.cors_test'),
     (r'^/?$', direct_to_template, {'template': 'base.html'}),
 )
 
