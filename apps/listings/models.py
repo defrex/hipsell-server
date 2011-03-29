@@ -1,14 +1,34 @@
+import random
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.utils.hashcompat import sha_constructor
 
 class BaseModel(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     modified_on = models.DateTimeField(auto_now=True)
-    active = models.BooleanField(default=True)
+    active = models.BooleanField(default=True, blank=True)
 
     class Meta:
         abstract = True
         ordering = ['-id',]
+
+class Profile(models.Model):
+    user = models.OneToOneField(User)
+    activation_key = models.CharField(max_length=100)
+
+    def __unicode__(self):
+        return self.user.username
+
+@receiver(post_save, sender=User)
+def create_user(sender, instance, created, **kwargs):
+    if created: 
+        instance.username = instance.email
+        instance.save()
+        salt = sha_constructor(str(random.random())).hexdigest()[:5]
+        activation_key = sha_constructor(salt+instance.username).hexdigest()
+        Profile.objects.create(user=instance, activation_key=activation_key)
 
 class Listing(BaseModel):
     """

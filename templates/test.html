@@ -56,6 +56,20 @@
                 });
             </script>
 
+            <span id="user_post">/api/v1/user/</span>
+            <script>
+                $('#user_post').click(function(e) {
+                    $.Create({
+                        url: '/api/v1/user/', 
+                        data: {
+                            email: 'text@example.com'
+                        },
+                        success: function(data) {
+                            console.log(data);
+                        }
+                    });
+                });
+            </script>
         </div>
     </body>
 </html>

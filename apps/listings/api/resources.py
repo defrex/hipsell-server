@@ -1,53 +1,64 @@
 from django.contrib.auth.models import User
 from tastypie import fields
-from tastypie.authorization import Authorization
+from tastypie.authentication import Authentication, BasicAuthentication
+from tastypie.authorization import Authorization, DjangoAuthorization
+from tastypie.http import HttpCreated
 from tastypie.resources import ModelResource
+from tastypie.utils import dict_strip_unicode_keys
 
 from listings.api.fields import Base64FileField
-from listings.models import Listing, Offer, Comment, Question
+from listings.models import Listing, Offer, Profile, Comment, Question
 
 class UserResource(ModelResource):
+    
     class Meta:
-        authorization = Authorization()
         queryset = User.objects.all()
         resource_name = 'user'
+
+        allowed_methods = ['post',]
+        authentication = Authentication()
+        authorization = Authorization()
 
 class ListingResource(ModelResource):
     photo = Base64FileField('photo')
     user = fields.ForeignKey(UserResource, 'user')
 
     class Meta:
-        authorization = Authorization()
-        queryset = User.objects.all()
         queryset = Listing.objects.all()
         resource_name = 'listing'
+
+        authentication = BasicAuthentication()
+        authorization = DjangoAuthorization()
 
 class OfferResource(ModelResource):
     user = fields.ForeignKey(UserResource, 'user')
     listing = fields.ForeignKey(ListingResource, 'listing')
 
     class Meta:
-        authorization = Authorization()
-        queryset = User.objects.all()
         queryset = Offer.objects.all()
         resource_name = 'offer'
+
+        authentication = BasicAuthentication()
+        authorization = DjangoAuthorization()
 
 class CommentResource(ModelResource):
     user = fields.ForeignKey(UserResource, 'user')
     offer = fields.ForeignKey(OfferResource, 'offer')
 
     class Meta:
-        authorization = Authorization()
-        queryset = User.objects.all()
         queryset = Comment.objects.all()
         resource_name = 'comment'
+
+        authentication = BasicAuthentication()
+        authorization = DjangoAuthorization()
 
 class QuestionResource(ModelResource):
     user = fields.ForeignKey(UserResource, 'user')
     listing = fields.ForeignKey(ListingResource, 'listing')
 
     class Meta:
-        authorization = Authorization()
-        queryset = User.objects.all()
         queryset = Question.objects.all()
         resource_name = 'question'
+
+        authentication = BasicAuthentication()
+        authorization = DjangoAuthorization()
