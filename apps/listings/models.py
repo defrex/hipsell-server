@@ -1,5 +1,5 @@
 import random
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -16,7 +16,7 @@ class BaseModel(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User)
-    activation_key = models.CharField(max_length=100)
+    token = models.CharField(max_length=100, blank=True)
 
     def __unicode__(self):
         return self.user.username
@@ -25,10 +25,12 @@ class Profile(models.Model):
 def create_user(sender, instance, created, **kwargs):
     if created: 
         instance.username = instance.email
+        basic_group = Group.objects.get(name='basic')
+        instance.groups.add(basic_group)
         instance.save()
         salt = sha_constructor(str(random.random())).hexdigest()[:5]
-        activation_key = sha_constructor(salt+instance.username).hexdigest()
-        Profile.objects.create(user=instance, activation_key=activation_key)
+        token = sha_constructor(salt+instance.username).hexdigest()
+        Profile.objects.create(user=instance, token=token)
 
 class Listing(BaseModel):
     """

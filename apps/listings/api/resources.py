@@ -6,6 +6,7 @@ from tastypie.http import HttpCreated
 from tastypie.resources import ModelResource
 from tastypie.utils import dict_strip_unicode_keys
 
+from listings.api.authentication import TokenAuthentication
 from listings.api.fields import Base64FileField
 from listings.models import Listing, Offer, Profile, Comment, Question
 
@@ -27,7 +28,7 @@ class ListingResource(ModelResource):
         queryset = Listing.objects.all()
         resource_name = 'listing'
 
-        authentication = BasicAuthentication()
+        authentication = TokenAuthentication()
         authorization = DjangoAuthorization()
 
 class OfferResource(ModelResource):
@@ -38,7 +39,7 @@ class OfferResource(ModelResource):
         queryset = Offer.objects.all()
         resource_name = 'offer'
 
-        authentication = BasicAuthentication()
+        authentication = TokenAuthentication()
         authorization = DjangoAuthorization()
 
 class CommentResource(ModelResource):
@@ -49,7 +50,7 @@ class CommentResource(ModelResource):
         queryset = Comment.objects.all()
         resource_name = 'comment'
 
-        authentication = BasicAuthentication()
+        authentication = TokenAuthentication()
         authorization = DjangoAuthorization()
 
 class QuestionResource(ModelResource):
@@ -60,5 +61,5 @@ class QuestionResource(ModelResource):
         queryset = Question.objects.all()
         resource_name = 'question'
 
-        authentication = BasicAuthentication()
+        authentication = TokenAuthentication()
         authorization = DjangoAuthorization()
