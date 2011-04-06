@@ -10,7 +10,7 @@ DEFAULT_CORS_PATHS = (
         ('Access-Control-Allow-Origin', '*'),
         ('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE'),
         ('Access-Control-Allow-Credentials', 'true'),
-        ('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type'),
+        ('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Authenticate'),
     )),
 )
 
