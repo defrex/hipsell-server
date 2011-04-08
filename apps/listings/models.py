@@ -45,6 +45,9 @@ class Listing(BaseModel):
 
     def __unicode__(self):
         return self.description
+    
+    def best_offer(self):
+        return Offer.objects.filter(listing=self).order_by('-amount')[0]
 
 class Offer(BaseModel):
     """

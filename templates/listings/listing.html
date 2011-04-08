@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    
+    <div class="listing">
+        <img src="http://dummyimage.com/100x100.png"/>
+        <!-- <img src="{{ MEDIA_URL }}{{ listing.photo }}"/> -->
+        <br><b>description:</b> {{ listing.description }}
+        <br><b>price:</b> ${{ listing.price }}
+        <br><b>best offer:</b> ${{ listing.best_offer.amount }}
+        <br><a href="#" id="offer">Make an offer</a>
+        <div class="map" data-lat="{{ listing.latitude }}" 
+                data-lng"{{ listing.longtitude }}"></div>
+    </div>
+
+{% endblock %}

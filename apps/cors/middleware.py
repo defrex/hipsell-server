@@ -59,8 +59,4 @@ class CORSMiddleware(object):
                 for k, v in headers:
                     response[k] = v
                 break
-            else:
-                print 'not setting CORS headers:'
-                print '\t', request.path, path
-                print '\t', content_type, types
         return response
