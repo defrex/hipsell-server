@@ -1,0 +1,39 @@
+
+a{text-decoration:none;color:$blue;}
+ul, li{margin:0;padding:0;list-style:none;}
+
+textarea, input[type=text], input[type=email]{
+    padding:5px;
+    border:none;
+    background-color:$white;
+
+    @include rounded(5px);
+}
+
+.placeheld{color:$grey;}
+
+input[type=button], input[type=submit], .button{
+    color: $black;
+    border:1px solid $grey;
+    background-color:$white;
+    padding:5px 10px;
+    font-size:12px;
+
+    @include gradient($white - #090909, $white - #222);
+    @include rounded();
+    @include box-shadow(0, 1px, 2px, $black + #666);
+}
+
+.clearfix:before, .clearfix:after { content: "\0020"; display: block; height: 0; overflow: hidden; }
+.clearfix:after { clear: both; }
+.clearfix { zoom: 1; }
+
+.w960{
+    display:block;
+    width:960px;
+    height:100%;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#dialog{display:none;}

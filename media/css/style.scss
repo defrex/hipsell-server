@@ -1,5 +1,78 @@
 
-.map{
-    height:250px;
-    width:250px;
+$white: #F1F1F2;
+
+$blue: #00f;
+$grey: #999;
+$black: #0A0A0A;
+$red: #D31920;
+
+@import "reset";
+@import "mixins";
+@import "generic";
+
+body, html{
+    background-color:$black;
 }
+
+
+header{
+    height:64px;
+    background-color:#58595b;
+    @include gradient(#58595b, #0a0a0a);
+    position:relative;
+
+    #logo{
+        margin-top:10px;
+    }
+
+    ul{
+        height:100%;
+        position:absolute;
+        top:0;left:300px;
+        width: 960px - 300px;
+
+        li{
+            height:100%;
+            float:left;
+
+            a{
+                display:block;
+                margin:15px 5px 0;
+
+                color: $white;
+                border:1px solid $black;
+                background-color: $black;
+                padding:10px 15px;
+                font-size:12px;
+
+                @include gradient($black + #222, $black + #333);
+                @include rounded();
+                @include box-shadow(0, 1px, 1px, $black + #555);
+            }
+        }
+        li.right{
+            float:right;
+
+            a{
+                @include gradient($red - #444, $red - #111);
+            }
+        }
+    }
+}
+
+#body{
+    @include gradient(#E5E5E6, #87888B);
+    padding:10px 0;
+}
+
+footer{
+    background-color:#58595b;
+    text-align:center;
+    padding:5px 0;
+    color:$white;
+
+    a{
+        color:$white;
+    }
+}
+

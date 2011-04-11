@@ -1,3 +1,296 @@
-.map {
-  height: 250px;
-  width: 250px; }
+/*  HTML5 ✰ Boilerplate  */
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+ins {
+  background-color: #ff9;
+  color: #000;
+  text-decoration: none; }
+
+mark {
+  background-color: #ff9;
+  color: #000;
+  font-style: italic;
+  font-weight: bold; }
+
+del {
+  text-decoration: line-through; }
+
+abbr[title], dfn[title] {
+  border-bottom: 1px dotted;
+  cursor: help; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0; }
+
+input, select {
+  vertical-align: middle; }
+
+body {
+  font: 13px/1.231 sans-serif;
+  *font-size: small; }
+
+select, input, textarea, button {
+  font: 99% sans-serif; }
+
+pre, code, kbd, samp {
+  font-family: monospace, sans-serif; }
+
+html {
+  overflow-y: scroll; }
+
+a:hover, a:active {
+  outline: none; }
+
+ul, ol {
+  margin-left: 2em; }
+
+ol {
+  list-style-type: decimal; }
+
+nav ul, nav li {
+  margin: 0;
+  list-style: none;
+  list-style-image: none; }
+
+small {
+  font-size: 85%; }
+
+strong, th {
+  font-weight: bold; }
+
+td {
+  vertical-align: top; }
+
+sub, sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative; }
+
+sup {
+  top: -0.5em; }
+
+sub {
+  bottom: -0.25em; }
+
+pre {
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  padding: 15px; }
+
+textarea {
+  overflow: auto; }
+
+.ie6 legend, .ie7 legend {
+  margin-left: -7px; }
+
+input[type="radio"] {
+  vertical-align: text-bottom; }
+
+input[type="checkbox"] {
+  vertical-align: bottom; }
+
+.ie7 input[type="checkbox"] {
+  vertical-align: baseline; }
+
+.ie6 input {
+  vertical-align: text-bottom; }
+
+label, input[type="button"], input[type="submit"], input[type="image"], button {
+  cursor: pointer; }
+
+button, input, select, textarea {
+  margin: 0; }
+
+input:invalid, textarea:invalid {
+  border-radius: 1px;
+  -moz-box-shadow: 0px 0px 5px red;
+  -webkit-box-shadow: 0px 0px 5px red;
+  box-shadow: 0px 0px 5px red; }
+
+.no-boxshadow input:invalid, .no-boxshadow textarea:invalid {
+  background-color: #f0dddd; }
+
+::-moz-selection {
+  background: #FF5E99;
+  color: #fff;
+  text-shadow: none; }
+
+::selection {
+  background: #FF5E99;
+  color: #fff;
+  text-shadow: none; }
+
+a:link {
+  -webkit-tap-highlight-color: #FF5E99; }
+
+button {
+  width: auto;
+  overflow: visible; }
+
+.ie7 img {
+  -ms-interpolation-mode: bicubic; }
+
+body, select, input, textarea {
+  color: #444; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold; }
+
+/**
+* clearfix
+* usage:
+    .container elem{float:right}
+    .container:after {@include clearfix();}
+**/
+/**
+* Rounded corners:
+    @rounded($radius: 10px);
+    @rounded-top($radius: 10px);
+    @rounded-top-right($radius: 10px);
+    @rounded-top-left($radius: 10px);
+    @rounded-bottom($radius: 10px);
+    @rounded-bottom-right($radius: 10px);
+    @rounded-bottom-left($radius: 10px);
+**/
+a {
+  text-decoration: none;
+  color: blue; }
+
+ul, li {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+textarea, input[type=text], input[type=email] {
+  padding: 5px;
+  border: none;
+  background-color: #f1f1f2;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px; }
+
+.placeheld {
+  color: #999999; }
+
+input[type=button], input[type=submit], .button {
+  color: #0a0a0a;
+  border: 1px solid #999999;
+  background-color: #f1f1f2;
+  padding: 5px 10px;
+  font-size: 12px;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#e8e8e9), to(#cfcfd0));
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-box-shadow: 0 1px 2px #707070;
+  -webkit-box-shadow: 0 1px 2px #707070;
+  box-shadow: 0 1px 2px #707070; }
+
+.clearfix:before, .clearfix:after {
+  content: "\0020";
+  display: block;
+  height: 0;
+  overflow: hidden; }
+
+.clearfix:after {
+  clear: both; }
+
+.clearfix {
+  zoom: 1; }
+
+.w960 {
+  display: block;
+  width: 960px;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto; }
+
+#dialog {
+  display: none; }
+
+body, html {
+  background-color: #0a0a0a; }
+
+header {
+  height: 64px;
+  background-color: #58595b;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#58595b), to(#0a0a0a));
+  position: relative; }
+  header #logo {
+    margin-top: 10px; }
+  header ul {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 300px;
+    width: 660px; }
+    header ul li {
+      height: 100%;
+      float: left; }
+      header ul li a {
+        display: block;
+        margin: 15px 5px 0;
+        color: #f1f1f2;
+        border: 1px solid #0a0a0a;
+        background-color: #0a0a0a;
+        padding: 10px 15px;
+        font-size: 12px;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(#2c2c2c), to(#3d3d3d));
+        border-radius: 5px;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -moz-box-shadow: 0 1px 1px #5f5f5f;
+        -webkit-box-shadow: 0 1px 1px #5f5f5f;
+        box-shadow: 0 1px 1px #5f5f5f; }
+    header ul li.right {
+      float: right; }
+      header ul li.right a {
+        background-image: -webkit-gradient(linear, left top, left bottom, from(#8f0000), to(#c2080f)); }
+
+#body {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#e5e5e6), to(#87888b));
+  padding: 10px 0; }
+
+footer {
+  background-color: #58595b;
+  text-align: center;
+  padding: 5px 0;
+  color: #f1f1f2; }
+  footer a {
+    color: #f1f1f2; }

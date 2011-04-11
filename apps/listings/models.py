@@ -25,9 +25,9 @@ class Profile(models.Model):
 def create_user(sender, instance, created, **kwargs):
     if created: 
         instance.username = instance.email
-        basic_group = Group.objects.get(name='basic')
-        instance.groups.add(basic_group)
-        instance.save()
+        # basic_group = Group.objects.get(name='basic')
+        # instance.groups.add(basic_group)
+        # instance.save()
         salt = sha_constructor(str(random.random())).hexdigest()[:5]
         token = sha_constructor(salt+instance.username).hexdigest()
         Profile.objects.create(user=instance, token=token)
