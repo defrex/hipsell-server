@@ -1,4 +1,4 @@
-//depends: jquery-1.5.1.js
+//depends: lib/jquery.js, lib/jquery-ui.js
 
 var hs = new Object();
 

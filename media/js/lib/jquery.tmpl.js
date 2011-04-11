@@ -1,0 +1,1 @@
+//depends: lib/jquery.js, lib/jquery.tmpl-b1.js
