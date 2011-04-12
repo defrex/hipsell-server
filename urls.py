@@ -17,6 +17,7 @@ v1_api.register(QuestionResource())
 
 urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
+    (r'^api/v1/auth/', 'listings.api.views.auth'),
     (r'^api/', include(v1_api.urls)),
     (r'^listings/', include('listings.urls')),
     (r'^test/$', direct_to_template, {'template': 'test.html'}),

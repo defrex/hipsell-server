@@ -1,9 +1,10 @@
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned, ValidationError
 from tastypie import fields
 from tastypie.authentication import Authentication, BasicAuthentication
 from tastypie.authorization import Authorization, DjangoAuthorization
 from tastypie.http import HttpCreated
-from tastypie.resources import ModelResource
+from tastypie.resources import Resource, ModelResource
 from tastypie.utils import dict_strip_unicode_keys
 
 from listings.api.authentication import TokenAuthentication
