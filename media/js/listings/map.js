@@ -1,15 +1,17 @@
 //depends: listings/main.js
 
-$(function(){
-    if ($('.map').length){
-        $('.map').each(function(){
-            var map = new google.maps.Map(this, {
-                zoom: 8,
-                center: new google.maps.LatLng($(this).attr('data-lat'), 
-                                               $(this).attr('data-lng')),
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            });
-            $(this).data('map', map);
-        });
-    }
-});
+// $(function(){
+//     if ($('div.map').length){
+//         $('div.map').each(function(){
+//             var lat = parseFloat($(this).attr('data-lat')),
+//                 lng = parseFloat($(this).attr('data-lng'));
+//             hs.log(lat, lng);
+//             var map = new google.maps.Map(this, {
+//                 zoom: 14,
+//                 center: new google.maps.LatLng(lat, lng),
+//                 mapTypeId: google.maps.MapTypeId.ROADMAP
+//             });
+//             $(this).data('map', map);
+//         });
+//     }
+// });

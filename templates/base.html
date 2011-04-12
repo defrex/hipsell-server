@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Rocket Lister</title>
+	<title>Hipsell</title>
 	{% load coat %}
     {% load include_js %}
 
@@ -16,11 +16,18 @@
         //CONST.apiToken = 'fake';
     </script>
 
-    <script type="text/javascript" 
-        src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<!--    <script type="text/javascript" 
+        src="http://maps.google.com/maps/api/js?sensor=false"></script> -->
     {% include_js %}
 </head>
 <body>
+    <section id="top-bar"><div class="w960">
+        <a href="#">Contact</a>
+        <a href="#">About</a>
+        <a href="#">Help</a>
+        <a href="#" class="login">Login</a>
+    </div></section>
+
     <header><div class="w960">
         <img id="logo" src="{{ MEDIA_URL }}img/header_logo.png" />
         <ul>
@@ -35,13 +42,13 @@
         {% block content %}{% endblock %}
     </div></section>
 
-    <footer><div class="w960">
+<!--     <footer><div class="w960">
         <a href="#">Link</a> |
         <a href="#">Link</a> |
         <a href="#">Link</a> |
         <a href="#">Link</a> |
         <a href="#">Link</a>
-    </div></footer>
+    </div></footer> -->
 
     <div id="dialog"></div>
 </body>
