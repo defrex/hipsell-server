@@ -11,22 +11,6 @@ except ImportError:
 
 class ViewsTestCase(TestCase):
 
-    #def test_post_user(self):
-    #    request = HttpRequest()
-    #    post_data = '''{
-    #        "email": "demo@hipsell.com"
-    #        }'''
-    #    request._raw_post_data = post_data
-    #    
-    #    resp = self.client.post('/api/v1/user/', data=post_data, content_type='application/json')
-    #    self.assertEqual(resp.status_code, 201)
-    #    self.assertEqual(resp['location'], 'http://testserver/api/v1/user/3/')
-
-    #    #make sure posted user exists
-    #    user = User.objects.get(email='demo@hipsell.com')
-    #    user.set_password('password')
-    #    user.save()
-
     def test_gets(self):
         request = HttpRequest()
         post_data = '''{
