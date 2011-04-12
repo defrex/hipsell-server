@@ -27,6 +27,8 @@ urlpatterns = patterns('',
 
 if settings.DEVELOPMENT:
     urlpatterns += patterns('',
+        (r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', 
+                {'url': '%simg/favicon.ico' % settings.MEDIA_URL}),
         (r'^media/(?P<path>.*)$', 'django.views.static.serve',
-                    {'document_root': settings.MEDIA_ROOT}),
+                {'document_root': settings.MEDIA_ROOT}),
     )

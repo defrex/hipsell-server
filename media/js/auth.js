@@ -24,8 +24,8 @@ hs._Auth.prototype.authenticated = function(clbk){
         contentType: 'application/json',
         type: 'POST',
         complete: function(data, textStatus, jqXHR){
-            if (jqXHR.status == 200){
-                hs.log('200', data);
+            if (jqXHR.status == 201){
+                hs.log('201', data);
                 auth.token = data.token;
                 if (clbk) clbk.call(auth);
             }else{
