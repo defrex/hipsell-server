@@ -16,6 +16,7 @@
         "model": "auth.user", 
         "fields": {
             "username": "typh",
+            "password": "sha1$2061e$8c3223952c0b82255ff11faf3450c1c6433731de",
             "email": "jason@hipsell.com"
         }
     }, 
