@@ -5,7 +5,8 @@
     <div class="listing clearfix">
 
         <div id="listing-image">
-            <img src="http://lorempixum.com/560/418/technics/"/>
+            <img src="{{ MEDIA_URL }}img/hipsell-photo-take.png"/>
+            <!-- <img src="http://lorempixum.com/560/418/technics/"/> -->
             <!-- <img src="{{ MEDIA_URL }}{{ listing.photo }} id="listing-image""/> -->
         </div>
 
@@ -19,19 +20,21 @@
                 <div class="listing-obi asking">
                     <div class="listing-obi-title">Asking Price</div>
                     <div class="listing-obi-value">
-                        ${{ listing.price }}
+                        <!-- ${{ listing.price }} -->
+                        $1500
                     </div>
                 </div>
                 <div class="listing-obi best-offer">
                     <div class="listing-obi-title">Best Offer</div>
                     <div class="listing-obi-value">
-                        ${{ listing.best_offer.amount }}
+                        <!-- ${{ listing.best_offer.amount }} -->
+                        $0
                     </div>
                 </div>
                 <div class="listing-obi date">
-                    <div class="listing-obi-title">Hours Ago</div>
+                    <div class="listing-obi-title">Minutes Ago</div>
                     <div class="listing-obi-value">
-                        10
+                        1
                     </div>
                 </div>
             </div>
