@@ -1,16 +1,49 @@
 {% extends "base.html" %}
 
 {% block content %}
-    
-    <div class="listing">
-        <img src="http://dummyimage.com/100x100.png"/>
-        <!-- <img src="{{ MEDIA_URL }}{{ listing.photo }}"/> -->
-        <br><b>description:</b> {{ listing.description }}
-        <br><b>price:</b> ${{ listing.price }}
-        <br><b>best offer:</b> ${{ listing.best_offer.amount }}
-        <br><a href="#" id="offer">Make an offer</a>
-        <div class="map" data-lat="{{ listing.latitude }}" 
-                data-lng"{{ listing.longtitude }}"></div>
+
+    <div class="listing clearfix">
+
+        <div id="listing-image">
+            <img src="http://lorempixum.com/560/418/technics/"/>
+            <!-- <img src="{{ MEDIA_URL }}{{ listing.photo }} id="listing-image""/> -->
+        </div>
+
+        <div id="listing-sidebar">
+            
+            <a href="http://maps.google.com/maps?ll={{ listing.latitude }},{{ listing.longtitude }}&z=16">
+                <img class="map" src="http://maps.google.com/maps/api/staticmap?center={{ listing.latitude }},{{ listing.longtitude }}&zoom=14&size=340x200&sensor=false" />
+            </a>
+
+            <div id="listing-offerbar" class="clearfix">
+                <div class="listing-obi asking">
+                    <div class="listing-obi-title">Asking Price</div>
+                    <div class="listing-obi-value">
+                        ${{ listing.price }}
+                    </div>
+                </div>
+                <div class="listing-obi best-offer">
+                    <div class="listing-obi-title">Best Offer</div>
+                    <div class="listing-obi-value">
+                        ${{ listing.best_offer.amount }}
+                    </div>
+                </div>
+                <div class="listing-obi date">
+                    <div class="listing-obi-title">Hours Ago</div>
+                    <div class="listing-obi-value">
+                        10
+                    </div>
+                </div>
+            </div>
+            <a href="#" id="offer" class="button">Make an offer</a>
+            <a href="#" id="question" class="button">Ask a Question</a>
+
+            <div id="listing-description">
+               <!-- {{ listing.description }} -->
+               Apogee Ensemble, 8 channels of premium 24-bit 192K AD/DA conversion, 4 mic pres, and more. Box, manual, power cord and everything. Must see. power cord and everything. Must see.
+            </div>
+        </div>
+
     </div>
 
     <script id="offerTmpl" type="text/x-jquery-tmpl">
