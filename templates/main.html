@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hipsell</title>
+    {% load coat %}
+    {% load include_js %}
+
+    <link rel="stylesheet" type="text/css" 
+        href="{{ MEDIA_URL }}css/Aristo/jquery-ui-1.8.7.custom.css">
+    <link rel="stylesheet" type="text/css" 
+        href="{% coat "css/style.scss" %}">
+</head>
+<body>
+    <section id="top-bar"><div class="w960">
+        <a href="#">About</a>
+        <a href="#">Help</a>
+        <a href="#">Contact</a>
+        <a href="#" class="login">Login</a>
+    </div></section>
+
+    <header><div class="w960">
+        <img id="logo" src="{{ MEDIA_URL }}img/header_logo.png" />
+        <ul>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Account</a></li>
+            <li><a href="#">Browse</a></li>
+            <li class="right"><a href="#">Post</a></li>
+        </ul>
+    </div></header>
+
+    <section id="body"><div class="w960">
+        <div id="main"></div>
+    </div></section>
+
+    <footer><div class="w960">
+        <a href="#">Blog</a>
+        <a href="#">Twitter</a>
+        <a href="#">Facebook</a>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        © 2011 Hipsell Inc
+    </div></footer>
+
+    <div id="dialog"></div>
+
+    {% include_js %}
+</body>
+</html>

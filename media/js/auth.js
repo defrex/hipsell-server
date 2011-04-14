@@ -4,7 +4,7 @@ hs._Auth = function(){
     if (hs.auth instanceof hs._Auth)
         throw('hs._Auth is not to be instantiated other then for hs.auth');
 
-    this.token = CONST.apiToken;
+    this.token = 'TODO';
 };
 
 hs._Auth.prototype.isAuthenticated = function(){

@@ -1,3 +1,4 @@
+//depends: lib/json2.js
 /*!
  * jQuery JavaScript Library v1.5.1
  * http://jquery.com/

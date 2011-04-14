@@ -1,4 +1,4 @@
-//depends: lib/jquery.js, lib/jquery-ui.js, lib/json2.js
+//depends: lib/main.js
 
 var hs = new Object();
 

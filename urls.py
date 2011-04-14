@@ -22,7 +22,7 @@ urlpatterns = patterns('',
     (r'^listings/', include('listings.urls')),
     (r'^test/$', direct_to_template, {'template': 'test.html'}),
     (r'^cors_test/$', 'cors.views.cors_test'),
-    (r'^/?$', direct_to_template, {'template': 'base.html'}),
+    (r'^/?$', direct_to_template, {'template': 'main.html'}),
 )
 
 if settings.DEVELOPMENT:
