@@ -9,19 +9,24 @@ try:
 except ImportError:
     import simplejson as json
 
-user = User.objects.get(email='jason@hipsell.com')
+user = User.objects.get(username='jason@hipsell.com')
 
 class UserTestCase(TestCase):
     def test_post_user(self):
         request = HttpRequest()
         post_data = '''{
-            "email": "demo@hipsell.com"
+            "username": "demo@hipsell.com"
             }'''
         request._raw_post_data = post_data
         resp = self.client.post('/api/v1/user/', data=post_data, content_type='application/json')
         self.assertEqual(resp.status_code, 201)
         self.assertEqual(resp['location'], 'http://testserver/api/v1/user/3/')
-        new_user = User.objects.get(email='demo@hipsell.com')
+        new_user = User.objects.get(username='demo@hipsell.com')
+
+        # test dupe user posts
+        resp = self.client.post('/api/v1/user/', data=post_data, content_type='application/json')
+        self.assertEqual(resp.status_code, 400)
+        self.assertEqual(json.loads(resp.content)['username'][0], 'This email is already registered.')
 
     def test_login(self):
         token = user.profile.token

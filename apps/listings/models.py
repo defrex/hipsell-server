@@ -1,5 +1,5 @@
 import random
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User, Group, Permission
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -24,8 +24,11 @@ class Profile(models.Model):
 @receiver(post_save, sender=User)
 def create_user(sender, instance, created, **kwargs):
     if created: 
-        instance.username = instance.email
-        basic_group = Group.objects.get(name='basic')
+        basic_group, created = Group.objects.get_or_create(name='basic')
+        if created:
+            basic_group.permissions.add(Permission.objects.get(codename='add_listing'))
+            basic_group.permissions.add(Permission.objects.get(codename='add_offer'))
+            basic_group.permissions.add(Permission.objects.get(codename='add_question'))
         instance.groups.add(basic_group)
         instance.save()
         salt = sha_constructor(str(random.random())).hexdigest()[:5]

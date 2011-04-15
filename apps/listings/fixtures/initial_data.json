@@ -1,31 +1,17 @@
 [
     {
         "pk": 1, 
-        "model": "auth.group", 
-        "fields": {
-            "name": "basic", 
-            "permissions": [
-                34, 
-                37, 
-                43
-            ]
-        }
-    }, 
-    {
-        "pk": 1, 
         "model": "auth.user", 
         "fields": {
-            "username": "typh",
             "password": "sha1$2061e$8c3223952c0b82255ff11faf3450c1c6433731de",
-            "email": "jason@hipsell.com"
+            "username": "jason@hipsell.com"
         }
     }, 
     {
         "pk": 2, 
         "model": "auth.user", 
         "fields": {
-            "username": "defrex",
-            "email": "aron@hipsell.com"
+            "username": "aron@hipsell.com"
         }
     },
     {

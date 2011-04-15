@@ -6,9 +6,11 @@ from tastypie.authorization import Authorization, DjangoAuthorization
 from tastypie.http import HttpCreated
 from tastypie.resources import Resource, ModelResource
 from tastypie.utils import dict_strip_unicode_keys
+from tastypie.validation import FormValidation
 
 from listings.api.authentication import TokenAuthentication
 from listings.api.fields import Base64FileField
+from listings.forms import UserForm
 from listings.models import Listing, Offer, Profile, Comment, Question
 
 class UserResource(ModelResource):
@@ -37,7 +39,8 @@ class UserResource(ModelResource):
         allowed_methods = ['post',]
         authentication = Authentication()
         authorization = Authorization()
-        fields = ['email', 'token',]
+        fields = ['username', 'token',]
+        validation = FormValidation(form_class=UserForm)
 
 class ListingResource(ModelResource):
     photo = Base64FileField('photo')
