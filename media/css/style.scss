@@ -215,3 +215,34 @@ footer{
     a:hover{text-decoration:underline;}
 }
 
+#authDialogForm{
+
+    label{
+        vertical-align:top;
+        display:block;
+        margin-bottom:10px;
+        input{
+            float:right;
+        }
+    }
+    label.password{
+        display:none;
+        .password-text{
+            float:left;
+            width:100px;
+        }
+    }
+    input{
+        width:150px;
+    }
+    a{
+        display:block;
+        font-size:12px;
+    }
+    a.password{
+        text-align:right;
+    }
+    a.cancel-password{
+        float:left;
+    }
+}

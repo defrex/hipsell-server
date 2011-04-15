@@ -1,4 +1,4 @@
-//depends: main.js, init.js
+//depends: main.js, core/init.js
 
 hs.goTo = function(url){document.location.hash = '#'+url;};
 

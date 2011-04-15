@@ -408,3 +408,24 @@ footer {
     margin-right: 10px; }
   footer a:hover {
     text-decoration: underline; }
+
+#authDialogForm label {
+  vertical-align: top;
+  display: block;
+  margin-bottom: 10px; }
+  #authDialogForm label input {
+    float: right; }
+#authDialogForm label.password {
+  display: none; }
+  #authDialogForm label.password .password-text {
+    float: left;
+    width: 100px; }
+#authDialogForm input {
+  width: 150px; }
+#authDialogForm a {
+  display: block;
+  font-size: 12px; }
+#authDialogForm a.password {
+  text-align: right; }
+#authDialogForm a.cancel-password {
+  float: left; }
