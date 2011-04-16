@@ -20,7 +20,7 @@ class UserTestCase(TestCase):
         request._raw_post_data = post_data
         resp = self.client.post('/api/v1/user/', data=post_data, content_type='application/json')
         self.assertEqual(resp.status_code, 201)
-        self.assertEqual(resp['location'], 'http://testserver/api/v1/user/3/')
+        self.assertEqual(resp['location'], 'http://testserver/api/v1/user/8/')
         new_user = User.objects.get(username='demo@hipsell.com')
 
         # test dupe user posts
@@ -30,7 +30,7 @@ class UserTestCase(TestCase):
 
     def test_login(self):
         token = user.profile.token
-        resp = self.client.get('/api/v1/auth/', data={'format': 'json'}, HTTP_AUTHORIZATION='Basic ' + base64.b64encode('jason@hipsell.com:password'))
+        resp = self.client.get('/api/v1/auth/', data={'format': 'json'}, HTTP_AUTHORIZATION='Basic ' + base64.b64encode('jason@hipsell.com:jason'))
         self.assertEqual(resp.status_code, 200)
         deserialized = json.loads(resp.content)
         self.assertEqual(deserialized['token'], token)
