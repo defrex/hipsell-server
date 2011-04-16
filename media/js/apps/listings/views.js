@@ -4,6 +4,9 @@ hs.listings.views = new Object();
 
 hs.listings.views.ListingPage = hs.views.Page.extend({
     template: 'listingPage',
+    events: {
+        'click #offer': 'makeOffer'
+    },
     initialize: function(){
         this.model.bind('change:photo', _.bind(this.updatePhoto, this));
         this.model.bind('change:description', _.bind(this.updateDesc, this));
@@ -43,5 +46,13 @@ hs.listings.views.ListingPage = hs.views.Page.extend({
         if (this.model.get('price')){
             this.$('.asking .listing-obi-value').text('$'+this.model.get('price'));
         }
-    }
+    },
+    makeOffer: function(){
+        var dialog = new hs.views.FormDialog({template: 'listingOfferDialog'});
+        dialog.bind('submit', function(){
+            var offer = new hs.listings.models.Offer();
+            offer.set('amount', dialog.amount);
+            offer.save();
+        }).render();
+    },
 });

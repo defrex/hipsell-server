@@ -2,28 +2,16 @@
 
 hs.auth = hs.auth || new Object();
 
-hs.auth.Dialog = hs.views.View.extend({
-    id: dialog,
-    events: {
-        'submit form': 'submit',
+hs.auth.Dialog = hs.views.FormDialog.extend({
+    events: _.extend(hs.views.FormDialog.prototype.events, {
         'click a.password': 'showPassword',
         'click a.cancel-password': 'hidePassword'
-    },
-    render: function(){
-        $('body').append(this.el);
-        $(this.el).html(ich.authDialog()).dialog({
-            modal: true,
-            buttons: {
-                "Enter": function() {$(this).children('form').submit();},
-                "Cancel": function(){$(this).dialog('close');}
-            }
-        });
-        return this;
-    },
+    }),
     submit: function(e){
         e.preventDefault();
-        var email = $('input[name=email]').val();
-        this.trigger('set:email', [email]);
+        this.email = $('input[name=email]').val();
+        this.trigger('set:email', this.email);
+        hs.views.FormDialog.prototype.events.apply(this, arguments);
     },
     showPassword: function(e){
         e.preventDefault();
@@ -34,8 +22,5 @@ hs.auth.Dialog = hs.views.View.extend({
         e.preventDefault();
         this.$('label.password').hide();
         this.$('a.password').show(200);
-    },
-    remove: function(){
-        $(this.el).dialog('close').remove();
     }
 });

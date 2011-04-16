@@ -27,7 +27,7 @@ hs._Auth.prototype.authenticated = function(clbk, context){
 
 hs._Auth.prototype.setEmail = function(email){
     this.email = email;
-    this.trigger('change:email');
+    this.trigger('change:email', this.email);
     return this;
 };
 
@@ -45,7 +45,7 @@ hs._Auth.prototype._createUser = function(clbk){
                 hs.log('201', jqXHR);
                 this.token = JSON.parse(jqXHR.responseText).token;
                 localStorage.setItem('token', this.token);
-                this.trigger('change:isAuthenticated', [true]);
+                this.trigger('change:isAuthenticated', true);
                 clbk();
             }else{
                 hs.log('err', jqXHR);
@@ -59,8 +59,7 @@ hs._Auth.prototype._createUser = function(clbk){
 hs._Auth.prototype._loginPrompt = function(clbk){
     var dialog = new hs.auth.Dialog();
     dialog.bind('set:email', _.bind(function(email){
-        this.setEmail(email);
-        this._createUser(function(){
+        this.setEmail(email)._createUser(function(){
             dialog.remove();
             clbk();
         });
@@ -72,7 +71,8 @@ hs._Auth.prototype._loginPrompt = function(clbk){
 hs._Auth.prototype.logout = function(){
     this.token = undefined;
     this.email = undefined;
-    this.trigger('change:isAuthenticated', [false]);
+    localStorage.removeItem('token')
+    this.trigger('change:isAuthenticated', false);
     return this;
 };
 
