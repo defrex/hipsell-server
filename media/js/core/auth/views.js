@@ -1,11 +1,12 @@
 //depends: core/views.js, core/auth/main.js, core/init.js
 
 hs.auth = hs.auth || new Object();
+hs.auth.views = new Object();
 
-hs.auth.Login = hs.views.View.extend({
+hs.auth.views.Login = hs.views.View.extend({
     el: $('#top-bar')[0],
     initialize: function(){
-        hs.auth.bind('isAuthenticated', _.bind(this.authChange, this));
+        hs.auth.bind('change:isAuthenticated', _.bind(this.authChange, this));
         this.authChange(hs.auth.isAuthenticated());
     },
     events: {
@@ -39,5 +40,5 @@ hs.auth.Login = hs.views.View.extend({
 });
 
 hs.init(function(){
-    hs.auth.login = new hs.auth.Login();
+    hs.auth.views.login = new hs.auth.views.Login();
 });
