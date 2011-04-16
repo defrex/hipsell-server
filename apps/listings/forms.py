@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django import forms
 
 class UserForm(forms.Form):
-    username = forms.CharField()
+    username = forms.EmailField()
 
     def clean_username(self):
         username = self.cleaned_data['username']
