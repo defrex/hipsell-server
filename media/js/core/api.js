@@ -37,7 +37,7 @@ hs.api = function(path, method, data, clbk, context){
             url: options.path,
             contentType: 'application/json',
             dataType: 'json',
-            data: method == 'GET'? undefined: JSON.stringify(options.data),
+            data: options.method == 'GET'? undefined: JSON.stringify(options.data),
             context: options.context,
             beforeSend: function(jqXHR){
                 jqXHR.setRequestHeader('Authorization', 'Token '+hs.auth.token);

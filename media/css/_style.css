@@ -266,9 +266,11 @@ body {
   #top-bar a {
     color: #999999;
     margin-right: 10px; }
-  #top-bar .login {
+  #top-bar .login, #top-bar .logout {
     color: #f1f1f2;
     margin-right: 2px; }
+  #top-bar .logout, #top-bar .email {
+    display: none; }
 
 header {
   height: 52px;

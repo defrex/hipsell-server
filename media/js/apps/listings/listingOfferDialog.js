@@ -1,4 +1,4 @@
-//depends: core/auth/dialog.js, apps/listing/main.js
+//depends: core/auth/dialog.js, apps/listings/main.js, apps/listings/views.js
 
 hs.listings.views.offerDialog = hs.auth.Dialog.extend({
     // events: _.extend(hs.auth.Dialog.prototype.events, {
