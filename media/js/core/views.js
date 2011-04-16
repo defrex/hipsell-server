@@ -3,13 +3,15 @@
 hs.views = new Object();
 
 hs.views.View = Backbone.View.extend({
-    _tmplContext: {
+    _tmplContext: _.defaults(this.options || {}, {
         'MEDIA_URL': hsConst.MEDIA_URL
-    },
+    }),
     render: function(){
         $(this.el).html(this.renderTmpl());
     },
     renderTmpl: function(){
+        if (typeof this.template == 'undefined') 
+            throw('must define dialog template');
         return ich[this.template](_.extend(this._tmplContext, this.model.toJSON()));
     },
     since: function(date){
@@ -48,4 +50,38 @@ hs.views.View = Backbone.View.extend({
 
 hs.views.Page = hs.views.View.extend({
     id: 'main',
+});
+
+hs.views.Dialog = hs.views.View.extend({
+    id: dialog,
+    buttons: {
+        "OK": function(){this.trigger('click:ok').close();},
+        "Cancel": function(){this.trigger('click:cancel').close();}
+    },
+    render: function(){
+        $('body').append(this.el);
+        $(this.el).html(this.renderTemplate()).dialog({
+            modal: true,
+            buttons: _.bindAll(this.buttons, this)
+        });
+        return this;
+    },
+    close: function(){this.remove();},
+    remove: function(){
+        $(this.el).dialog('close').remove();
+    }
+});
+
+hs.views.FormDialog = hs.views.Dialog.extend({
+    buttons: {
+        "Submit": function() {this.$('form').submit();},
+        "Cancel": function(){this.trigger('click:cancel').close();}
+    },
+    events: {
+        'submit form': 'submit'
+    },
+    submit: function(e){
+        e.preventDefault();
+        this.trigger('submit').close();
+    }
 });

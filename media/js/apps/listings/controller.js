@@ -11,8 +11,7 @@ hs.regController('listings', Backbone.Controller.extend({
                 model: listing,
                 el: $('#main')
             });
-        view.render();
-        listing.fetch();
+        listing.fetch({success: _.bind(view.render, view)});
     }
 }));
 

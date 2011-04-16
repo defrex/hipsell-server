@@ -1,36 +1,49 @@
 //depends: main.js, core/auth/main.js
 
 hs.api = function(path, method, data, clbk, context){
-    if (typeof method == 'object'){
-        context = clbk;
-        clbk = data;
-        data = method;
-        method = 'POST';
-    }else if (_.isFunction(method)){
-        context = data;
-        clbk = method;
-        method = 'GET';
-        data = undefined;
+    var options = {
+        method: 'GET',
+        auth: true
     }
-    if (_.isFunction(data)){
-        context = clbk;
-        clbk = data;
-        data = undefined;
-    }
-    _.bind(clbk, context);
 
-    hs.auth.authenticated(function(){
+    if (typeof path == 'object'){
+        options = _.defaults(path, options);
+    }else{
+        if (typeof method == 'object'){
+            options.context = clbk;
+            options.clbk = data;
+            options.data = method;
+            options.method = 'POST';
+        }else if (_.isFunction(method)){
+            options.context = data;
+            options.clbk = method;
+            options.method = 'GET';
+            options.data = undefined;
+        }
+        if (_.isFunction(data)){
+            options.context = clbk;
+            options.clbk = data;
+            options.data = undefined;
+        }
+    }
+    _.bind(options.clbk, options.context);
+
+    var passThrough = function(clbk){clbk();};
+    if (options.auth)
+        passThrough = hs.auth.authenticated;
+
+    passThrough(function(){
         $.ajax({
-            url: path,
+            url: options.path,
             contentType: 'application/json',
             dataType: 'json',
-            data: method == 'GET'? undefined: JSON.stringify(data),
-            context: context,
+            data: method == 'GET'? undefined: JSON.stringify(options.data),
+            context: options.context,
             beforeSend: function(jqXHR){
                 jqXHR.setRequestHeader('Authorization', 'Token '+hs.auth.token);
             },
             complete: function(jqXHR){
-                clbk(JSON.parse(jqXHR.responseText), jqXHR.status);
+                options.clbk(JSON.parse(jqXHR.responseText), jqXHR.status);
             }
         });
     });
@@ -44,9 +57,15 @@ Backbone.sync = function(method, model, success, error){
         'delete': 'DELETE',
         'read': 'GET'
     };
-    hs.api(model.url(), methodMap[method], model.toJSON(), function(data, status){
-        if (status < 400) success(data);
-        else error(data);
+    hs.api({
+        path: model.url(), 
+        method: methodMap[method], 
+        data: model.toJSON(), 
+        auth: model.auth[methodMap[method]],
+        clbk: function(data, status){
+            if (status < 400) success(data);
+            else error(data);
+        }
     });
 };
 
