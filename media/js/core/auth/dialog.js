@@ -19,7 +19,7 @@ hs.auth.Dialog = hs.views.FormDialog.extend({
         this.trigger('set:email', this.email);
         this.password = $('input[name=password]').val();
         this.trigger('set:password', this.password);
-        hs.views.FormDialog.prototype.events.apply(this, arguments);
+        hs.views.FormDialog.prototype.submit.apply(this, arguments);
         if (this.options && this.options.submit)
             this.options.submit(this.email, this.password);
     },

@@ -5,6 +5,7 @@ hs._Auth = function(){
         throw('hs._Auth is not to be instantiated other then for hs.auth');
     
     this.token = localStorage.getItem('token');
+    this.email = localStorage.getItem('email');
     _.extend(this, Backbone.Events);
 };
 
@@ -27,11 +28,12 @@ hs._Auth.prototype.authenticated = function(clbk, context){
 
 hs._Auth.prototype.setEmail = function(email){
     this.email = email;
+    localStorage.setItem('email', this.email);
     this.trigger('change:email', this.email);
     return this;
 };
 
-hs._Auth.prototype.setPassword = function(email){
+hs._Auth.prototype.setPassword = function(password){
     this.password = password;
     this.trigger('change:password', this.password);
     return this;
@@ -71,13 +73,16 @@ hs._Auth.prototype._loginUser = function(clbk){
     if (typeof this.email == 'undefined' || typeof this.password == 'undefined')
         throw('cannot login a user with no email or password');
     $.ajax({
-        url: '/api/v1/auth/', 
-        data: JSON.stringify({username: this.email, password: this.password}), 
+        url: '/api/v1/auth/',
         contentType: 'application/json',
         type: 'GET',
         context: this,
+        beforeSend: function(jqXHR){
+            jqXHR.setRequestHeader('Authorization', 'Basic '
+                    +Base64.encode(this.email+':'+this.password));
+        },
         complete: function(jqXHR){
-            if (jqXHR.status == 201){
+            if (jqXHR.status == 200){
                 this.setToken(JSON.parse(jqXHR.responseText).token);
                 clbk();
             }else{
@@ -116,6 +121,7 @@ hs._Auth.prototype.logout = function(){
     this.token = undefined;
     this.email = undefined;
     localStorage.removeItem('token');
+    localStorage.removeItem('email');
     this.trigger('change:token');
     this.trigger('change:isAuthenticated', false);
     return this;

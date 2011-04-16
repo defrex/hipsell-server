@@ -65,7 +65,7 @@ hs.views.Dialog = hs.views.View.extend({
     buttonBind: function(){
         _.each(this.buttons, _.bind(function(value, key){
             if (_.isFunction(value))
-                this.options[key] = _.bind(value, this);
+                this.buttons[key] = _.bind(value, this);
         }, this));
     },
     render: function(){
