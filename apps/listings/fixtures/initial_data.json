@@ -3,15 +3,65 @@
         "pk": 1, 
         "model": "auth.user", 
         "fields": {
-            "password": "sha1$2061e$8c3223952c0b82255ff11faf3450c1c6433731de",
-            "username": "jason@hipsell.com"
+            "username": "jason@hipsell.com", 
+            "password": "sha1$f74f7$c2e31ffea9740e3e4524f28c3a3d31d940ba4e62", 
+            "date_joined": "2011-04-16 12:02:37"
         }
     }, 
     {
         "pk": 2, 
         "model": "auth.user", 
         "fields": {
-            "username": "aron@hipsell.com"
+            "username": "aron@hipsell.com", 
+            "password": "sha1$421b6$2f94e9d5de53ee118eb3f51ce3be1c27f21e42a2", 
+            "date_joined": "2011-04-16 12:02:37"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "matt@hipsell.com", 
+            "password": "sha1$a7dc3$5247d5e9bbe80bed76b4258d83d8a1e186a99aad", 
+            "date_joined": "2011-04-16 12:02:37"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "peter@hipsell.com", 
+            "password": "sha1$f9afc$dc1a83b95b776a6ed24af0521cb1a0f42e5906aa", 
+            "date_joined": "2011-04-16 12:02:37"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "bjorn@hipsell.com", 
+            "password": "sha1$21b38$b1f266e13ee7e605f22c746f2ed795c0ef2dc18f", 
+            "date_joined": "2011-04-16 12:02:37"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "john@hipsell.com", 
+            "password": "sha1$b5550$2c74e91c4370dce25dd8728c9c59ce1cd9c54f24", 
+            "date_joined": "2011-04-16 12:02:37"
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "admin@hipsell.com", 
+            "is_superuser": true, 
+            "is_staff": true, 
+            "password": "sha1$8c636$baf5768dce2fc515d0042d88bc4bc8c4982c6bbb", 
+            "date_joined": "2011-04-16 12:05:31"
         }
     },
     {
