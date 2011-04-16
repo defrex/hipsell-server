@@ -14,6 +14,7 @@ hs.listings.views.ListingPage = hs.views.Page.extend({
         this.model.bind('change:latitude', _.bind(this.updateLoc, this));
         this.model.bind('change:longtitude', _.bind(this.updateLoc, this));
         this.model.bind('change:price', _.bind(this.updatePrice, this));
+        this.model.bind('change:best_offer', _.bind(this.updateBestOffer, this));
     },
     updatePhoto: function(){
         if (this.model.get('photo')){
@@ -47,16 +48,23 @@ hs.listings.views.ListingPage = hs.views.Page.extend({
             this.$('.asking .listing-obi-value').text('$'+this.model.get('price'));
         }
     },
+    updateBestOffer: function(){
+        if (this.model.get('best_offer')){
+            this.$('.best-offer .listing-obi-value')
+                    .text('$'+this.model.get('best_offer').amount);
+        }
+    },
     // render: function(){
     //     hs.views.Page.prototype.render.apply(this, arguments);
     //     this.model.change();
     // },
-    makeOffer: function(){
-        var dialog = new hs.views.FormDialog({template: 'listingOfferDialog'});
-        dialog.bind('submit', function(){
+    makeOffer: function(e){
+        e.preventDefault();
+        var dialog = new hs.listings.views.offerDialog();
+        dialog.bind('submit', _.bind(function(){
             var offer = new hs.listings.models.Offer();
             offer.set('amount', dialog.amount);
             offer.save();
-        }).render();
+        }, this)).render();
     },
 });

@@ -57,7 +57,7 @@ hs.views.Page = hs.views.View.extend({
 });
 
 hs.views.Dialog = hs.views.View.extend({
-    id: dialog,
+    el: $('#dialog')[0],
     buttons: {
         "OK": function(){this.trigger('click:ok').close();},
         "Cancel": function(){this.trigger('click:cancel').close();}

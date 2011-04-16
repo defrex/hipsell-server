@@ -411,23 +411,23 @@ footer {
   footer a:hover {
     text-decoration: underline; }
 
-#authDialogForm label {
+#dialog label {
   vertical-align: top;
   display: block;
   margin-bottom: 10px; }
-  #authDialogForm label input {
+  #dialog label input {
     float: right; }
-#authDialogForm label.password {
+#dialog label.password {
   display: none; }
-  #authDialogForm label.password .password-text {
+  #dialog label.password .password-text {
     float: left;
     width: 100px; }
-#authDialogForm input {
+#dialog input {
   width: 150px; }
-#authDialogForm a {
+#dialog a {
   display: block;
   font-size: 12px; }
-#authDialogForm a.password {
+#dialog a.password {
   text-align: right; }
-#authDialogForm a.cancel-password {
+#dialog a.cancel-password {
   float: left; }
