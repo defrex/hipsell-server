@@ -50,12 +50,12 @@ class ListingTestCase(TestCase):
         
     def test_get_listing_detail(self):
         token = user.profile.token
-        resp = self.client.get('/api/v1/listing/', data={'format': 'json'})#, HTTP_AUTHORIZATION='Token ' + token)
         resp = self.client.get('/api/v1/listing/1/', data={'format': 'json'})#, HTTP_AUTHORIZATION='Token ' + token)
         self.assertEqual(resp.status_code, 200)
         deserialized = json.loads(resp.content)
-        self.assertEqual(len(deserialized), 11)
+        self.assertEqual(len(deserialized), 12)
         self.assertEqual(deserialized['description'], u'Slightly used Super 88 system')
+        self.assertEqual(deserialized['best_offer']['amount'], 10.75)
         
     def test_get_listing_slice(self):
         token = user.profile.token

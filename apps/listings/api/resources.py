@@ -46,7 +46,7 @@ class UserResource(ModelResource):
 class ListingResource(ModelResource):
     photo = Base64FileField('photo')
     user = fields.ForeignKey(UserResource, 'user')
-    offers = fields.ToManyField('listings.api.resources.OfferResource', 'offers', full=True)
+    offers = fields.ToManyField('listings.api.resources.OfferResource', 'offer_set', full=True, null=True)
 
     class Meta:
         queryset = Listing.objects.all()
@@ -58,8 +58,7 @@ class ListingResource(ModelResource):
 
     def dehydrate(self, bundle):
         offers = bundle.data['offers']
-        if offers:
-            bundle.data['best_offer'] = offers[0]
+        bundle.data['best_offer'] = offers[0] if offers else None
         del bundle.data['offers']
         return bundle
 
