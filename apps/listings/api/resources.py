@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned, ValidationError
+from django.db.models import Max
 from tastypie import fields
 from tastypie.authentication import Authentication, BasicAuthentication
 from tastypie.authorization import Authorization, DjangoAuthorization
@@ -14,6 +15,16 @@ from listings.forms import UserForm
 from listings.models import Listing, Offer, Profile, Comment, Question
 
 class UserResource(ModelResource):
+
+    class Meta:
+        queryset = User.objects.all()
+        resource_name = 'user'
+
+        allowed_methods = ['post',]
+        authentication = Authentication()
+        authorization = Authorization()
+        fields = ['username', 'token',]
+        validation = FormValidation(form_class=UserForm)
 
     def dehydrate(self, bundle):
         bundle.data['token'] = bundle.obj.profile.token
@@ -32,25 +43,10 @@ class UserResource(ModelResource):
         resp.status_code = 201
         return resp
     
-    class Meta:
-        queryset = User.objects.all()
-        resource_name = 'user'
-
-        allowed_methods = ['post',]
-        authentication = Authentication()
-        authorization = Authorization()
-        fields = ['username', 'token',]
-        validation = FormValidation(form_class=UserForm)
-
 class ListingResource(ModelResource):
     photo = Base64FileField('photo')
     user = fields.ForeignKey(UserResource, 'user')
-
-    def is_authenticated(self, request, **kwargs):
-        if request.method == 'GET':
-            return True
-        else:
-            return super(ListingResource, self).is_authenticated(request, **kwargs)
+    offers = fields.ToManyField('listings.api.resources.OfferResource', 'offers', full=True)
 
     class Meta:
         queryset = Listing.objects.all()
@@ -59,6 +55,19 @@ class ListingResource(ModelResource):
         allowed_methods = ['get', 'post',]
         authentication = TokenAuthentication()
         authorization = DjangoAuthorization()
+
+    def dehydrate(self, bundle):
+        offers = bundle.data['offers']
+        if offers:
+            bundle.data['best_offer'] = offers[0]
+        del bundle.data['offers']
+        return bundle
+
+    def is_authenticated(self, request, **kwargs):
+        if request.method == 'GET':
+            return True
+        else:
+            return super(ListingResource, self).is_authenticated(request, **kwargs)
 
 class OfferResource(ModelResource):
     user = fields.ForeignKey(UserResource, 'user')

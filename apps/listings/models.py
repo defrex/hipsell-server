@@ -57,8 +57,11 @@ class Offer(BaseModel):
     Potential buyer's offer on a listing.
     """
     amount = models.DecimalField(max_digits=10, decimal_places=2)
-    user = models.ForeignKey(User)
-    listing = models.ForeignKey(Listing)
+    user = models.ForeignKey(User, related_name='offers')
+    listing = models.ForeignKey(Listing, related_name='offers')
+
+    class Meta:
+        ordering = ['-amount',]
 
     def __unicode__(self):
         return '$%d' % (self.amount,)
@@ -68,8 +71,8 @@ class Comment(BaseModel):
     Conversation over an offer.
     """
     comment = models.TextField()
-    offer = models.ForeignKey(Offer)
-    user = models.ForeignKey(User)
+    offer = models.ForeignKey(Offer, related_name='comments')
+    user = models.ForeignKey(User, related_name='comments')
 
     def __unicode__(self):
         return self.comment
@@ -79,8 +82,8 @@ class Question(BaseModel):
     Pre-sale questions and answers (public).
     """
     answer = models.TextField(blank=True)
-    listing = models.ForeignKey(Listing)
-    user = models.ForeignKey(User)
+    listing = models.ForeignKey(Listing, related_name='questions')
+    user = models.ForeignKey(User, related_name='questions')
     question = models.CharField(max_length=255)
 
     def __unicode__(self):
