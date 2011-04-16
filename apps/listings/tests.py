@@ -38,7 +38,7 @@ class UserTestCase(TestCase):
 class ListingTestCase(TestCase):
     def test_get_listing_list(self):
         token = user.profile.token
-        resp = self.client.get('/api/v1/listing/', data={'format': 'json'}, HTTP_AUTHORIZATION='Token ' + token)
+        resp = self.client.get('/api/v1/listing/', data={'format': 'json'})#, HTTP_AUTHORIZATION='Token ' + token)
         self.assertEqual(resp.status_code, 200)
         deserialized = json.loads(resp.content)
         self.assertEqual(len(deserialized['objects']), 3)
@@ -50,8 +50,8 @@ class ListingTestCase(TestCase):
         
     def test_get_listing_detail(self):
         token = user.profile.token
-        resp = self.client.get('/api/v1/listing/', data={'format': 'json'}, HTTP_AUTHORIZATION='Token ' + token)
-        resp = self.client.get('/api/v1/listing/1/', data={'format': 'json'}, HTTP_AUTHORIZATION='Token ' + token)
+        resp = self.client.get('/api/v1/listing/', data={'format': 'json'})#, HTTP_AUTHORIZATION='Token ' + token)
+        resp = self.client.get('/api/v1/listing/1/', data={'format': 'json'})#, HTTP_AUTHORIZATION='Token ' + token)
         self.assertEqual(resp.status_code, 200)
         deserialized = json.loads(resp.content)
         self.assertEqual(len(deserialized), 11)
@@ -59,7 +59,7 @@ class ListingTestCase(TestCase):
         
     def test_get_listing_slice(self):
         token = user.profile.token
-        resp = self.client.get('/api/v1/listing/set/2;1/', data={'format': 'json'}, HTTP_AUTHORIZATION='Token ' + token)
+        resp = self.client.get('/api/v1/listing/set/2;1/', data={'format': 'json'})#, HTTP_AUTHORIZATION='Token ' + token)
         self.assertEqual(resp.status_code, 200)
         deserialized = json.loads(resp.content)
         self.assertEqual(len(deserialized), 1)

@@ -46,10 +46,17 @@ class ListingResource(ModelResource):
     photo = Base64FileField('photo')
     user = fields.ForeignKey(UserResource, 'user')
 
+    def is_authenticated(self, request, **kwargs):
+        if request.method == 'GET':
+            return True
+        else:
+            return super(ListingResource, self).is_authenticated(request, **kwargs)
+
     class Meta:
         queryset = Listing.objects.all()
         resource_name = 'listing'
 
+        allowed_methods = ['get', 'post',]
         authentication = TokenAuthentication()
         authorization = DjangoAuthorization()
 
