@@ -19,7 +19,7 @@ hs._Auth.prototype.authenticated = function(clbk, context){
         return this;
     }
     if (typeof this.email == 'undefined')
-        this._loginPrompt(clbk);
+        this.loginPrompt(clbk);
     else
         this._createUser(clbk);
     return this;
@@ -28,6 +28,20 @@ hs._Auth.prototype.authenticated = function(clbk, context){
 hs._Auth.prototype.setEmail = function(email){
     this.email = email;
     this.trigger('change:email', this.email);
+    return this;
+};
+
+hs._Auth.prototype.setPassword = function(email){
+    this.password = password;
+    this.trigger('change:password', this.password);
+    return this;
+};
+
+hs._Auth.prototype.setToken = function(token){
+    this.token = token;
+    localStorage.setItem('token', this.token);
+    this.trigger('change:token', this.token);
+    this.trigger('change:isAuthenticated', true);
     return this;
 };
 
@@ -42,10 +56,7 @@ hs._Auth.prototype._createUser = function(clbk){
         context: this,
         complete: function(jqXHR){
             if (jqXHR.status == 201){
-                hs.log('201', jqXHR);
-                this.token = JSON.parse(jqXHR.responseText).token;
-                localStorage.setItem('token', this.token);
-                this.trigger('change:isAuthenticated', true);
+                this.setToken(JSON.parse(jqXHR.responseText).token);
                 clbk();
             }else{
                 hs.log('err', jqXHR);
@@ -56,22 +67,56 @@ hs._Auth.prototype._createUser = function(clbk){
     return this;
 };
 
-hs._Auth.prototype._loginPrompt = function(clbk){
-    var dialog = new hs.auth.Dialog();
-    dialog.bind('set:email', _.bind(function(email){
-        this.setEmail(email)._createUser(function(){
-            dialog.remove();
-            clbk();
-        });
-    }, this));
-    dialog.render();
+hs._Auth.prototype._loginUser = function(clbk){
+    if (typeof this.email == 'undefined' || typeof this.password == 'undefined')
+        throw('cannot login a user with no email or password');
+    $.ajax({
+        url: '/api/v1/auth/', 
+        data: JSON.stringify({username: this.email, password: this.password}), 
+        contentType: 'application/json',
+        type: 'GET',
+        context: this,
+        complete: function(jqXHR){
+            if (jqXHR.status == 201){
+                this.setToken(JSON.parse(jqXHR.responseText).token);
+                clbk();
+            }else{
+                hs.log('err', jqXHR);
+                hs.log('TODO: handle login error');
+            }
+        }
+    });
     return this;
+};
+
+hs._Auth.prototype.loginPrompt = function(clbk, options){
+    if (typeof clbk == 'object'){
+        options = clbk;
+        clbk = function(){};
+    }else if(typeof clbk == 'undefined'){
+        options = new Object();
+        clbk = function(){};
+    }
+    new hs.auth.Dialog(_.extend(options, {
+        submit: _.bind(function(email, password){
+            if (typeof password != 'undefined')
+                this.login(email, password, clbk);
+            else
+                this._createUser(clbk);
+        }, this)
+    })).render();
+    return this;
+};
+
+hs._Auth.prototype.login = function(email, password, clbk){
+    this.setEmail(email).setPassword(password)._loginUser(clbk);
 };
 
 hs._Auth.prototype.logout = function(){
     this.token = undefined;
     this.email = undefined;
-    localStorage.removeItem('token')
+    localStorage.removeItem('token');
+    this.trigger('change:token');
     this.trigger('change:isAuthenticated', false);
     return this;
 };

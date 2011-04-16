@@ -34,10 +34,11 @@ body{
         margin-right:10px;
     }
 
-    .login{
+    .login, .logout{
         color:$white;
         margin-right:2px;
     }
+    .logout, .email{display:none;}
 }
 
 header{

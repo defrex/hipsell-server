@@ -47,6 +47,10 @@ hs.listings.views.ListingPage = hs.views.Page.extend({
             this.$('.asking .listing-obi-value').text('$'+this.model.get('price'));
         }
     },
+    // render: function(){
+    //     hs.views.Page.prototype.render.apply(this, arguments);
+    //     this.model.change();
+    // },
     makeOffer: function(){
         var dialog = new hs.views.FormDialog({template: 'listingOfferDialog'});
         dialog.bind('submit', function(){

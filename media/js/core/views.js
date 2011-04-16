@@ -7,12 +7,16 @@ hs.views.View = Backbone.View.extend({
         'MEDIA_URL': hsConst.MEDIA_URL
     }),
     render: function(){
-        $(this.el).html(this.renderTmpl());
+        if (this.template) $(this.el).html(this.renderTmpl());
+        return this;
     },
     renderTmpl: function(){
         if (typeof this.template == 'undefined') 
             throw('must define dialog template');
-        return ich[this.template](_.extend(this._tmplContext, this.model.toJSON()));
+        var context = _.clone(this._tmplContext);
+        if (this.model)
+            context = _.extend(context, this.model.toJSON());
+        return ich[this.template](context);
     },
     since: function(date){
         if (!(date instanceof Date)) date = new Date(date);
@@ -44,7 +48,7 @@ hs.views.View = Backbone.View.extend({
                     }
                 }
             }
-        }
+        }else throw('since only takes dated from the past');
     }
 });
 
@@ -58,23 +62,31 @@ hs.views.Dialog = hs.views.View.extend({
         "OK": function(){this.trigger('click:ok').close();},
         "Cancel": function(){this.trigger('click:cancel').close();}
     },
+    buttonBind: function(){
+        _.each(this.buttons, _.bind(function(value, key){
+            if (_.isFunction(value))
+                this.options[key] = _.bind(value, this);
+        }, this));
+    },
     render: function(){
         $('body').append(this.el);
-        $(this.el).html(this.renderTemplate()).dialog({
+        this.buttonBind();
+        $(this.el).html(this.renderTmpl()).dialog({
             modal: true,
-            buttons: _.bindAll(this.buttons, this)
+            buttons: this.buttons
         });
         return this;
     },
-    close: function(){this.remove();},
+    close: function(){return this.remove()},
     remove: function(){
         $(this.el).dialog('close').remove();
+        return this;
     }
 });
 
 hs.views.FormDialog = hs.views.Dialog.extend({
     buttons: {
-        "Submit": function() {this.$('form').submit();},
+        "Submit": function(){this.$('form').submit();},
         "Cancel": function(){this.trigger('click:cancel').close();}
     },
     events: {
