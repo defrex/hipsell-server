@@ -43,8 +43,8 @@ class Listing(BaseModel):
     photo = models.ImageField(upload_to='uploads', null=True, blank=True)
     user = models.ForeignKey(User)
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
-    latitude = models.DecimalField(max_digits=7, decimal_places=4)
-    longitude = models.DecimalField(max_digits=7, decimal_places=4)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
 
     def __unicode__(self):
         return self.description
