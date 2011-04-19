@@ -255,11 +255,14 @@ input[type=button]:hover, input[type=submit]:hover, .button:hover {
 #dialog {
   display: none; }
 
+html, body {
+  background-image: url(../img/bg.png); }
+
 html {
   background-color: #87888B; }
 
 body {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#e5e5e6), to(#87888b));
+  /*@include gradient(#E5E5E6, #87888B);*/
   font-size: 14px; }
 
 #top-bar {
@@ -306,7 +309,7 @@ header {
       header ul li a {
         display: block;
         margin: 12px 5px 0;
-        padding: 5px 15px 9px;
+        padding: 6px 15px 8px;
         font-size: 12px;
         font-weight: bold;
         color: #d6d6d6;
@@ -329,6 +332,7 @@ header {
         color: #f1f1f2;
         text-decoration: none; }
       header ul li a:active {
+        padding: 8px 15px 6px;
         border: 1px solid #2c2c2c;
         background-image: -webkit-gradient(linear, left top, left bottom, from(#3d3d3d), to(#4e4e4e));
         border-radius: 5px;
@@ -351,9 +355,9 @@ header {
       height: 418px;
       width: 560px;
       float: left;
-      -moz-box-shadow: 0 4px 8px #707070;
-      -webkit-box-shadow: 0 4px 8px #707070;
-      box-shadow: 0 4px 8px #707070; }
+      -moz-box-shadow: 0 4px 8px #3d3d3d;
+      -webkit-box-shadow: 0 4px 8px #3d3d3d;
+      box-shadow: 0 4px 8px #3d3d3d; }
       #body .listing #listing-image img {
         border: 1px solid #999999; }
     #body .listing #listing-sidebar {
@@ -363,9 +367,9 @@ header {
       padding: 10px;
       background-color: #f1f1f2;
       position: relative;
-      -moz-box-shadow: 0 4px 8px #707070;
-      -webkit-box-shadow: 0 4px 8px #707070;
-      box-shadow: 0 4px 8px #707070; }
+      -moz-box-shadow: 0 4px 8px #3d3d3d;
+      -webkit-box-shadow: 0 4px 8px #3d3d3d;
+      box-shadow: 0 4px 8px #3d3d3d; }
       #body .listing #listing-sidebar .map {
         /*position:absolute;
         bottom:10px;

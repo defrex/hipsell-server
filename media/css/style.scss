@@ -12,12 +12,16 @@ $yellow: #333;
 @import "mixins";
 @import "generic";
 
+html, body{
+    background-image:url(../img/bg.png);
+}
+
 html{
     background-color:#87888B;
 }
 
 body{
-    @include gradient(#E5E5E6, #87888B);
+    /*@include gradient(#E5E5E6, #87888B);*/
     font-size: 14px;
 }
 
@@ -74,7 +78,7 @@ header{
             a{
                 display:block;
                 margin:12px 5px 0;
-                padding:5px 15px 9px;
+                padding:6px 15px 8px;
 
                 font-size:12px;
                 font-weight:bold;
@@ -95,6 +99,7 @@ header{
                 text-decoration:none;
             }
             a:active{
+                padding:8px 15px 6px;
                 border:1px solid $color;
                 @include gradient($color + #111, $color + #222);
                 @include rounded();
@@ -121,7 +126,7 @@ header{
             width:560px;
             float:left;
 
-            @include box-shadow(0, 4px, 8px, $black + #666);
+            @include box-shadow(0, 4px, 8px, $black + #333);
 
             img{
                 border:1px solid $grey;
@@ -135,7 +140,7 @@ header{
             background-color:$white;
             position:relative;
 
-            @include box-shadow(0, 4px, 8px, $black + #666);
+            @include box-shadow(0, 4px, 8px, $black + #333);
 
             .map{
                 /*position:absolute;
