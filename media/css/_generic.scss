@@ -11,24 +11,30 @@ textarea, input[type=text], input[type=email]{
     @include rounded(5px);
 }
 
-.placeheld{color:$grey;}
+.placeheld, ::-webkit-input-placeholder, :-moz-placeholder{color:$grey;}
+
+$button-color: #d5d5d5;
 
 input[type=button], input[type=submit], .button{
-    $color:#d5d5d5;
-
     padding:7px 10px;
 
     font-size:14px;
     font-weight:bold;
-    color:$color - #777;
-    text-shadow: $color + #444 0 1px 2px;
+    color:$button-color - #777;
+    text-shadow: $button-color + #444 0 1px 2px;
     text-align:center;
 
-    border:1px solid $color - #181818;
-    background-color:$color;
+    border:1px solid $button-color - #181818;
+    background-color:$button-color;
     @include box-shadow(0, 1px, 2px, $black);
-    @include gradient($color + #080808, $color - #181818);
+    @include gradient($button-color + #080808, $button-color - #181818);
     @include rounded();
+}
+
+input[type=button]:hover, input[type=submit]:hover, .button:hover {
+    text-decoration:none;
+    color:$button-color - #888;
+    @include gradient($button-color + #111, $button-color - #222);
 }
 
 .clearfix:before, .clearfix:after { 

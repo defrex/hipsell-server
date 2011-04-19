@@ -20,6 +20,9 @@ hs.listings.views.ListingPage = hs.views.Page.extend({
         if (this.model.get('photo')){
             this.$('#listing-image img')
                     .attr('src', hsConst.MEDIA_URL+this.model.get('photo'));
+        }else{
+            this.$('#listing-image img')
+                    .attr('src', 'http://lorempixum.com/560/418/technics/');
         }
     },
     updateDesc: function(){
@@ -52,6 +55,8 @@ hs.listings.views.ListingPage = hs.views.Page.extend({
         if (this.model.get('best_offer')){
             this.$('.best-offer .listing-obi-value')
                     .text('$'+this.model.get('best_offer').amount);
+        }else{
+            this.$('.best-offer .listing-obi-value').text('$0');
         }
     },
     // render: function(){

@@ -23,8 +23,9 @@ body{
 
 #top-bar{
     background-color:$black;
-    background-image:url(../img/chalkboard_thin.jpg);
+    /*background-image:url(../img/chalkboard_thin.jpg);*/
     text-align:right;
+    font-size:13px;
     
     padding:5px;
     color:$grey - #222;
@@ -42,17 +43,19 @@ body{
 }
 
 header{
-    height:52px;
-    background-color:#58595b;
-    @include gradient($black + #383838, $black);
+    height:50px;
+    background-color:$black + #222;
+    /*@include gradient($black + #383838, $black);*/
+    background-image:url(../img/ab_grad.png);
     border-top:1px solid $black + #555;
-    border-bottom:1px solid $black + #666;
+    border-bottom:1px solid $black + #333;
+    @include box-shadow(0, 1px, 0px, $black);
     
     .w960{position:relative;}
 
     #logo{
-        margin-top:4px;
-        width:168px;
+        margin-top:5px;
+        width:auto;
         height:42px;
     }
 
@@ -66,26 +69,30 @@ header{
             height:100%;
             float:left;
 
-            $color: $black + #111;
+            $color: $black + #222;
 
             a{
                 display:block;
-                margin:7px 5px 0;
-                padding:10px 15px;
+                margin:12px 5px 0;
+                padding:5px 15px 9px;
 
                 font-size:12px;
                 font-weight:bold;
-                color: $white;
-                text-shadow: $color + #111 0 -1px 2px;
+                color: $black + #ccc;
+                text-shadow: $color 0 -1px 2px;
 
                 background-color: $color;
-                border:1px solid $color;
-                @include gradient($color + #444,$color + #111);
+                border:1px solid $color - #111;
+                border-top:1px solid $color + #666;
+                @include gradient($color + #444, $color + #181818);
                 @include rounded();
                 @include box-shadow(0, 1px, 2px, #000);
+                @include box-shadow(0, -1px, 1px, $color - #111);
             }
             a:hover{
-                @include gradient($color + #484848, $color + #181818);
+                @include gradient($color + #484848, $color + #222);
+                color:$white;
+                text-decoration:none;
             }
             a:active{
                 border:1px solid $color;
@@ -102,7 +109,6 @@ header{
 }
 
 #body{
-    border-top:1px solid $black + #999;
     padding:10px 0 0;
 
     .listing{
