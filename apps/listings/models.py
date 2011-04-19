@@ -44,7 +44,7 @@ class Listing(BaseModel):
     user = models.ForeignKey(User)
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     latitude = models.DecimalField(max_digits=7, decimal_places=4)
-    longtitude = models.DecimalField(max_digits=7, decimal_places=4)
+    longitude = models.DecimalField(max_digits=7, decimal_places=4)
 
     def __unicode__(self):
         return self.description
