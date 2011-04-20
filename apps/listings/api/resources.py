@@ -62,6 +62,11 @@ class ListingResource(ModelResource):
         del bundle.data['offers']
         return bundle
 
+    def obj_create(self, bundle, request=None, **kwargs):
+        bundle.data['user'] = UserResource().get_resource_uri(request.user)
+        return super(ListingResource, self).obj_create(bundle, request, **kwargs)
+
+
     def is_authenticated(self, request, **kwargs):
         if request.method == 'GET':
             return True

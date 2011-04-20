@@ -75,9 +75,8 @@ class ListingTestCase(TestCase):
         post_data = '''{
             "description": "Cheap poop", 
             "price": "2", 
-            "user": "/api/v1/user/1/",
             "latitude": "43.2", 
-            "longtitude": "-79.4",
+            "longitude": "-79.4",
             "photo": "/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAATABMDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDpT4yj0rwPDY+KTLeqdZm0LXJhL9o8wyRyOzRNHtITLINuAyLuTbuUVNoWt20ml+DFHjXRtZ1qF1ilNxcJh0lxubYXWTz1QeUjFSxLsGUb2K8L49+IzeI4Tpeh2ktl4eeWVmlSFWN3JvWRJTHs3IPMDtwctkFgM4rktK1m4kkjtlntbiOViTbxySkTr1KmJEc8qOcgjg5rlqYlxdoK51UsOp/E7H13RXknhH4weHdN8MWll4r11o9agaSOdXtLhiAJGCclCT8mzljuP8XOaK6U7q5zNWdjwLxNe3GieLNa0rT5TFZWd/PBBGQH2RrIwVctknAAHJrL/wCEg1T/AJ+v/Ia/4UUVDo03q4r7i1VqL7T+8+mfhT4b0HX/AIb6Zqur6DpV7qF09xJPcT2MTvI3nycklaKKK0SsZt31Z//Z"
             }'''
         request._raw_post_data = post_data
