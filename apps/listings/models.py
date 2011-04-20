@@ -5,6 +5,8 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.hashcompat import sha_constructor
 
+from sorl.thumbnail import get_thumbnail
+
 class BaseModel(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     modified_on = models.DateTimeField(auto_now=True)
@@ -45,6 +47,16 @@ class Listing(BaseModel):
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     latitude = models.FloatField()
     longitude = models.FloatField()
+
+    @property
+    def photo_urls(self):
+        try:
+            return {
+                'original': self.photo.url,
+                'web': get_thumbnail(self.photo, '560x418', crop='center', quality=99).url,
+                }
+        except IOError:
+            return {}
 
     def __unicode__(self):
         return self.description
