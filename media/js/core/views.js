@@ -42,7 +42,12 @@ hs.views.View = Backbone.View.extend({
                                 return {'text': 'Minutes ago', 
                                         'num': now.getMinutes() - date.getMinutes()};
                             }else{
-                                return {'text': 'just now', 'num': 0};
+                                if (date.getSeconds() < now.getSeconds()){
+                                    return {'text': 'Seconds ago', 
+                                            'num': now.getSeconds() - date.getSeconds()};
+                                }else{
+                                    return {'text': 'just now', 'num': 0};
+                                }
                             }
                         }
                     }

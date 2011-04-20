@@ -12,14 +12,14 @@ hs.listings.views.ListingPage = hs.views.Page.extend({
         this.model.bind('change:description', _.bind(this.updateDesc, this));
         this.model.bind('change:created_on', _.bind(this.updateCreated, this));
         this.model.bind('change:latitude', _.bind(this.updateLoc, this));
-        this.model.bind('change:longtitude', _.bind(this.updateLoc, this));
+        this.model.bind('change:longitude', _.bind(this.updateLoc, this));
         this.model.bind('change:price', _.bind(this.updatePrice, this));
         this.model.bind('change:best_offer', _.bind(this.updateBestOffer, this));
     },
     updatePhoto: function(){
         if (this.model.get('photo')){
             this.$('#listing-image img')
-                    .attr('src', hsConst.MEDIA_URL+this.model.get('photo'));
+                    .attr('src', this.model.get('photo'));
         }else{
             this.$('#listing-image img')
                     .attr('src', 'http://lorempixum.com/560/418/technics/');
@@ -38,9 +38,9 @@ hs.listings.views.ListingPage = hs.views.Page.extend({
         }
     },
     updateLoc: function(){
-        if (this.model.get('latitude') && this.model.get('longtitude')){
+        if (this.model.get('latitude') && this.model.get('longitude')){
             var lat = this.model.get('latitude'),
-                lng = this.model.get('longtitude');
+                lng = this.model.get('longitude');
             this.$('img.map').attr('src', 'http://maps.google.com/'
                     +'maps/api/staticmap?center='+lat+','+lng
                     +'&zoom=14&size=340x200&sensor=false');
