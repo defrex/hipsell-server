@@ -67,7 +67,7 @@ class Listing(BaseModel):
 
 
 @receiver(post_save, sender=Listing)
-def create_user(sender, instance, created, **kwargs):
+def create_listing(sender, instance, created, **kwargs):
     if not created: return
     send_mail(
         'Your Hipsell listing is ready to sell.', #subject
