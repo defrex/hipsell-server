@@ -1,7 +1,0 @@
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
-TASTYPIE_FULL_DEBUG = True
-DEVELOPMENT = True
-
-MEDIA_URL = '/media/'
-ADMIN_MEDIA_PREFIX = '/admin_media/'

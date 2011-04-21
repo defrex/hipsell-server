@@ -4,6 +4,7 @@ import os, sys
 from coat.settings import *
 
 PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
+sys.path.append(PROJECT_DIR)
 sys.path.append(os.path.join(PROJECT_DIR, 'apps'))
 
 DEBUG = False
@@ -95,8 +96,8 @@ EMAIL_HOST_PASSWORD = 'xcGc4Yzb'
 EMAIL_PORT = 587
 
 #for Amazon SES. Disabled for now.
-# AWS_ACCESS_KEY_ID = 'YOUR-ACCESS-KEY-ID'
-# AWS_SECRET_ACCESS_KEY = 'YOUR-SECRET-ACCESS-KEY'
+# AWS_ACCESS_KEY_ID = 'AKIAIXYU57QQHZBDSB2A'
+# AWS_SECRET_ACCESS_KEY = '2LyBJzjreVwdBun1tP/k9TCGNQSvUsrs/meP1DZv'
 # EMAIL_BACKEND = 'django_ses.SESBackend'
 
 from settings_local import *
