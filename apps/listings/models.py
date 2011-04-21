@@ -4,6 +4,7 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.hashcompat import sha_constructor
+from django.core.mail import send_mail
 
 from sorl.thumbnail import get_thumbnail
 
@@ -63,6 +64,21 @@ class Listing(BaseModel):
     
     def best_offer(self):
         return Offer.objects.filter(listing=self).order_by('-amount')[0]
+
+
+@receiver(post_save, sender=Listing)
+def create_user(sender, instance, created, **kwargs):
+    if not created: return
+    send_mail(
+        'Your Hipsell listing is ready to sell.', #subject
+'''Your Hipsell listing is ready. You can get to it here:
+
+http://dev.hipsell.com/#/listings/%i/
+
+Happy selling!''' % instance.id, #body
+        'sold@hipsell.com', #from
+        [instance.user.username]) #to
+
 
 class Offer(BaseModel):
     """
