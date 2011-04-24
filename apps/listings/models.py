@@ -73,7 +73,7 @@ def create_listing(sender, instance, created, **kwargs):
         'Your Hipsell listing is ready to sell.', #subject
 '''Your Hipsell listing is ready. You can get to it here:
 
-http://dev2.hipsell.com/#/listings/%i/
+http://dev.hipsell.com/#/listings/%i/
 
 Happy selling!''' % instance.id, #body
         'sold@hipsell.com', #from
