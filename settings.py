@@ -79,7 +79,7 @@ INSTALLED_APPS = (
     'javascript',
     'listings',
     'cors',
-    #'django_ses',
+    'django_ses',
 )
 
 JS_DIR = os.path.join(MEDIA_ROOT, 'js')
@@ -89,15 +89,15 @@ COAT_COMPILERS = {
 }
 
 #for gmail email
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'aron@hipsell.com'
-EMAIL_HOST_PASSWORD = 'xcGc4Yzb'
-EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER = 'aron@hipsell.com'
+# EMAIL_HOST_PASSWORD = 'xcGc4Yzb'
+# EMAIL_PORT = 587
 
 #for Amazon SES. Disabled for now.
-# AWS_ACCESS_KEY_ID = 'AKIAIXYU57QQHZBDSB2A'
-# AWS_SECRET_ACCESS_KEY = '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'
-# EMAIL_BACKEND = 'django_ses.SESBackend'
+AWS_ACCESS_KEY_ID = 'AKIAIXYU57QQHZBDSB2A'
+AWS_SECRET_ACCESS_KEY = '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'
+EMAIL_BACKEND = 'django_ses.SESBackend'
 
 from settings_local import *
