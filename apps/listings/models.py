@@ -76,7 +76,7 @@ def create_listing(sender, instance, created, **kwargs):
 http://dev.hipsell.com/#/listings/%i/
 
 Happy selling!''' % instance.id, #body
-        '<Hipsell> sold@hipsell.com', #from
+        'Hipsell <sold@hipsell.com>', #from
         [instance.user.username, 'sold@hipsell.com']) #to
 
 

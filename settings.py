@@ -99,5 +99,6 @@ COAT_COMPILERS = {
 AWS_ACCESS_KEY_ID = 'AKIAIXYU57QQHZBDSB2A'
 AWS_SECRET_ACCESS_KEY = '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'
 EMAIL_BACKEND = 'django_ses.SESBackend'
+SERVER_EMAIL = 'sold@hipsell.com'
 
 from settings_local import *
