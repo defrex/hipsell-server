@@ -53,7 +53,10 @@ hs.views.View = Backbone.View.extend({
                     }
                 }
             }
-        }else throw('since only takes dated from the past');
+        }else{
+            hs.log('bad date');
+            hs.log(date);
+        };
     }
 });
 
