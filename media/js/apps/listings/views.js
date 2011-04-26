@@ -1,4 +1,4 @@
-//depends: apps/listings/main.js, core/views.js
+//depends: apps/listings/main.js, core/views.js, core/date.js
 
 hs.listings.views = new Object();
 
@@ -32,7 +32,7 @@ hs.listings.views.ListingPage = hs.views.Page.extend({
     },
     updateCreated: function(){
         if (this.model.get('created_on')){
-            var since = this.since(this.model.get('created_on'));
+            var since = Date.since(this.model.get('created_on'));
             this.$('.date .listing-obi-title').text(since.text);
             this.$('.date .listing-obi-value').text(since.num);
         }
