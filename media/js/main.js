@@ -14,7 +14,7 @@ hs.error = function(){
         if (typeof console.error === "function")
             console.error.apply(console, arguments);
         else if (typeof console.log === "function"){
-            Array.prototype.unshift.call(arguments, 'Error:')
+            Array.prototype.unshift.call(arguments, 'Error:');
             console.log.apply(console, arguments);
         }
 }

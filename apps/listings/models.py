@@ -70,12 +70,14 @@ class Listing(BaseModel):
 def create_listing(sender, instance, created, **kwargs):
     if not created: return
     send_mail(
-        'Your Hipsell listing is ready to sell.', #subject
-'''Your Hipsell listing is ready. You can get to it here:
+        'Your Hipsell item has been posted!', #subject
+'''Hey Hipseller,
 
+Your item is now active and awaiting offers. It can be viewed here:
 http://dev.hipsell.com/#/listings/%i/
 
-Happy selling!''' % instance.id, #body
+Sincerely,
+Hipsell Team''' % instance.id, #body
         'Hipsell <sold@hipsell.com>', #from
         [instance.user.username, 'sold@hipsell.com']) #to
 
